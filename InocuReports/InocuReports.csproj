@@ -158,7 +158,10 @@
     <Compile Include="Controllers\ClinicaAdmin.cs" />
     <Compile Include="Controllers\Conexion.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InyeccionAdmin.cs" />
     <Compile Include="Controllers\MedicoAdmin.cs" />
+    <Compile Include="Controllers\PacienteAdmin.cs" />
+    <Compile Include="Controllers\ReporteAdmin.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
