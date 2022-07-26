@@ -82,7 +82,7 @@ namespace InocuReports.Controllers
             Conectar();
             try
             {
-                SqlCommand comando = new SqlCommand("GetMedicoByCodigoProfesional", cnn);
+                SqlCommand comando = new SqlCommand("GetMedicoByIdentificacion", cnn);
                 comando.CommandType = System.Data.CommandType.StoredProcedure;
                 comando.Parameters.Add(new SqlParameter("@identificacion", Identificacion));
                 SqlDataReader reader = comando.ExecuteReader();

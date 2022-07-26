@@ -38,13 +38,13 @@ namespace InocuReports.Controllers
             }
         }
 
-        public List<Reporte> GetMedicoByCodigoRegistro(string Codigo_registro)
+        public List<Reporte> GetReporteByCodigoRegistro(string Codigo_registro)
         {
             List<Reporte> lista = new List<Reporte>();
             Conectar();
             try
             {
-                SqlCommand comando = new SqlCommand("GetMedicoByCodigoRegistro", cnn);
+                SqlCommand comando = new SqlCommand("GetReporteByCodigoRegistro", cnn);
                 comando.CommandType = System.Data.CommandType.StoredProcedure;
                 comando.Parameters.Add(new SqlParameter("@codigo_registro", Codigo_registro));
                 SqlDataReader reader = comando.ExecuteReader();
@@ -77,13 +77,13 @@ namespace InocuReports.Controllers
             return lista;
         }
 
-        public List<Reporte> GetMedicoById(int Id)
+        public List<Reporte> GetReporteById(int Id)
         {
             List<Reporte> lista = new List<Reporte>();
             Conectar();
             try
             {
-                SqlCommand comando = new SqlCommand("GetMedicoById", cnn);
+                SqlCommand comando = new SqlCommand("GetReporteById", cnn);
                 comando.CommandType = System.Data.CommandType.StoredProcedure;
                 comando.Parameters.Add(new SqlParameter("@id", Id));
                 SqlDataReader reader = comando.ExecuteReader();

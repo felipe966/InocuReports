@@ -32,7 +32,7 @@ namespace InocuReports.Controllers
                 comando.Parameters.Add(new SqlParameter("@estado_civil", modelo.Estado_civil));
                 comando.Parameters.Add(new SqlParameter("@telefono_personal", modelo.Telefono_personal));
                 comando.Parameters.Add(new SqlParameter("@email", modelo.Email));
-                comando.Parameters.Add(new SqlParameter("@fecha_registro", modelo.Fecha_registro));
+                //comando.Parameters.Add(new SqlParameter("@fecha_registro", modelo.Fecha_registro));
                 comando.Parameters.Add(new SqlParameter("@ocupacion", modelo.Ocupacion));
                 comando.Dispose();
             }

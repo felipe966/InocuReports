@@ -80,15 +80,15 @@ namespace InocuReports.Controllers
             }
             return lista;
         }
-        public List<Clinica> GetClinicasByIdentificacion(string Identificacion)
+        public List<Clinica> GetClinicaByCedula(string Cedula_juridica)
         {
             List<Clinica> lista = new List<Clinica>();
             Conectar();
             try
             {
-                SqlCommand comando = new SqlCommand("GetClinicasByIdentificacion", cnn);
+                SqlCommand comando = new SqlCommand("GetClinicaByCedula", cnn);
                 comando.CommandType = System.Data.CommandType.StoredProcedure;
-                comando.Parameters.Add(new SqlParameter("@identificacion", Identificacion));
+                comando.Parameters.Add(new SqlParameter("@cedula_juridica", Cedula_juridica));
                 SqlDataReader reader = comando.ExecuteReader();
                 while (reader.Read())
                 {
