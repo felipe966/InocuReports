@@ -47,7 +47,7 @@ namespace InocuReports.Controllers
             }
         }
 
-        public List<Paciente> GetPacienteByIdentificacion(string Identificacion)
+        public IEnumerable<Paciente> GetPacienteByIdentificacion(string Identificacion)
         {
             List<Paciente> lista = new List<Paciente>();
             Conectar();
@@ -92,10 +92,10 @@ namespace InocuReports.Controllers
 
 
             }
-            return lista;
+            return lista.AsEnumerable();
         }
 
-        public List<Paciente> GetPacientes()
+        public IEnumerable<Paciente> GetPacientes()
         {
             List<Paciente> lista = new List<Paciente>();
             Conectar();
@@ -139,7 +139,7 @@ namespace InocuReports.Controllers
 
 
             }
-            return lista;
+            return lista.AsEnumerable();
         }
     }
 }

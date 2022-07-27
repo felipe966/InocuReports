@@ -38,7 +38,7 @@ namespace InocuReports.Controllers
             }
         }
 
-        public List<Reporte> GetReporteByCodigoRegistro(string Codigo_registro)
+        public IEnumerable<Reporte> GetReporteByCodigoRegistro(string Codigo_registro)
         {
             List<Reporte> lista = new List<Reporte>();
             Conectar();
@@ -74,10 +74,10 @@ namespace InocuReports.Controllers
 
 
             }
-            return lista;
+            return lista.AsEnumerable();
         }
 
-        public List<Reporte> GetReporteById(int Id)
+        public IEnumerable<Reporte> GetReporteById(int Id)
         {
             List<Reporte> lista = new List<Reporte>();
             Conectar();
@@ -113,11 +113,11 @@ namespace InocuReports.Controllers
 
 
             }
-            return lista;
+            return lista.AsEnumerable();
         }
 
 
-        public List<Reporte> GetReportes()
+        public IEnumerable<Reporte> GetReportes()
         {
             List<Reporte> lista = new List<Reporte>();
             Conectar();
@@ -152,7 +152,7 @@ namespace InocuReports.Controllers
 
 
             }
-            return lista;
+            return lista.AsEnumerable();
         }
     }
 }

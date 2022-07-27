@@ -40,7 +40,7 @@ namespace InocuReports.Controllers
             }
         }
 
-        public List<Clinica> GetClinicaByNombre(string Nombre)
+        public IEnumerable<Clinica> GetClinicaByNombre(string Nombre)
         {
             List<Clinica> lista = new List<Clinica>();
             Conectar();
@@ -78,9 +78,9 @@ namespace InocuReports.Controllers
 
 
             }
-            return lista;
+            return lista.AsEnumerable();
         }
-        public List<Clinica> GetClinicaByCedula(string Cedula_juridica)
+        public IEnumerable<Clinica> GetClinicaByCedula(string Cedula_juridica)
         {
             List<Clinica> lista = new List<Clinica>();
             Conectar();
@@ -118,10 +118,10 @@ namespace InocuReports.Controllers
 
 
             }
-            return lista;
+            return lista.AsEnumerable();
         }
 
-        public List<Clinica> GetClinicas()
+        public IEnumerable<Clinica> GetClinicas()
         {
             List<Clinica> lista = new List<Clinica>();
             Conectar();
@@ -158,7 +158,7 @@ namespace InocuReports.Controllers
 
 
             }
-            return lista;
+            return lista.AsEnumerable();
         }
     }
 }

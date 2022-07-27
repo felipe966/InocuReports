@@ -156,12 +156,18 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\ClinicaAdmin.cs" />
+    <Compile Include="Controllers\ClinicaController.cs" />
     <Compile Include="Controllers\Conexion.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InyeccionAdmin.cs" />
+    <Compile Include="Controllers\InyeccionController.cs" />
     <Compile Include="Controllers\MedicoAdmin.cs" />
+    <Compile Include="Controllers\MedicoController.cs" />
     <Compile Include="Controllers\PacienteAdmin.cs" />
+    <Compile Include="Controllers\PacienteController.cs" />
+    <Compile Include="Controllers\RegistroEfectosController.cs" />
     <Compile Include="Controllers\ReporteAdmin.cs" />
+    <Compile Include="Controllers\ReporteController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -227,6 +233,10 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\RegistroEfectos\Medicos.cshtml" />
+    <Content Include="Views\RegistroEfectos\Paso1.cshtml" />
+    <Content Include="Views\RegistroEfectos\Index.cshtml" />
+    <Content Include="Views\RegistroEfectos\Create.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -38,7 +38,7 @@ namespace InocuReports.Controllers
             }
         }
 
-        public List<Medico> GetMedicoByCodigoProfesional(string Codigo_profesional)
+        public IEnumerable<Medico> GetMedicoByCodigoProfesional(string Codigo_profesional)
         {
             List<Medico> lista = new List<Medico>();
             Conectar();
@@ -74,9 +74,9 @@ namespace InocuReports.Controllers
 
 
             }
-            return lista;
+            return lista.AsEnumerable();
         }
-        public List<Medico> GetMedicoByIdentificacion(string Identificacion)
+        public IEnumerable<Medico> GetMedicoByIdentificacion(string Identificacion)
         {
             List<Medico> lista = new List<Medico>();
             Conectar();
@@ -112,10 +112,10 @@ namespace InocuReports.Controllers
 
 
             }
-            return lista;
+            return lista.AsEnumerable();
         }
 
-        public List<Medico> GetMedicos()
+        public IEnumerable<Medico> GetMedicos()
         {
             List<Medico> lista = new List<Medico>();
             Conectar();
@@ -150,7 +150,7 @@ namespace InocuReports.Controllers
 
 
             }
-            return lista;
+            return lista.AsEnumerable();
         }
 
     }
