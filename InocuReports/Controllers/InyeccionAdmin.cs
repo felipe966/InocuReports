@@ -27,6 +27,7 @@ namespace InocuReports.Controllers
                 comando.Parameters.Add(new SqlParameter("@lugar_aplicacion", modelo.Lugar_aplicacion));
                 comando.Parameters.Add(new SqlParameter("@observaciones", modelo.Observaciones));
                 comando.Parameters.Add(new SqlParameter("@cuestionario", modelo.Cuestionario));
+                comando.ExecuteNonQuery();
                 comando.Dispose();
             }
             catch (Exception e)

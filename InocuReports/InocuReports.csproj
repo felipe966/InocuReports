@@ -155,6 +155,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\AppController.cs" />
     <Compile Include="Controllers\ClinicaAdmin.cs" />
     <Compile Include="Controllers\ClinicaController.cs" />
     <Compile Include="Controllers\Conexion.cs" />
@@ -165,7 +166,6 @@
     <Compile Include="Controllers\MedicoController.cs" />
     <Compile Include="Controllers\PacienteAdmin.cs" />
     <Compile Include="Controllers\PacienteController.cs" />
-    <Compile Include="Controllers\RegistroEfectosController.cs" />
     <Compile Include="Controllers\ReporteAdmin.cs" />
     <Compile Include="Controllers\ReporteController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -233,10 +233,12 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\RegistroEfectos\Medicos.cshtml" />
-    <Content Include="Views\RegistroEfectos\Paso1.cshtml" />
-    <Content Include="Views\RegistroEfectos\Index.cshtml" />
-    <Content Include="Views\RegistroEfectos\Create.cshtml" />
+    <Content Include="Views\App\Create.cshtml" />
+    <Content Include="Views\App\Index.cshtml" />
+    <Content Include="Views\App\Medicos.cshtml" />
+    <Content Include="Views\App\Paso1.cshtml" />
+    <Content Include="Views\App\Clinicas.cshtml" />
+    <Content Include="Views\App\Paso2.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

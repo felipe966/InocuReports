@@ -23,9 +23,11 @@ namespace InocuReports.Controllers
             return "value";
         }
 
-        // POST: api/Clinica
-        public void Post([FromBody]string value)
+        // POST: api/clinica
+        public IHttpActionResult GuardarMedico(Clinica nuevo)
         {
+            ClinicaAdmin.Guardar(nuevo);
+            return Ok();
         }
 
         // PUT: api/Clinica/5
