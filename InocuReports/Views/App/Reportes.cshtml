@@ -1,0 +1,63 @@
+﻿@model IEnumerable<InocuReports.Models.Reporte>
+
+@{
+    ViewBag.Title = "Reportes";
+}
+
+<h2>Reportes</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Codigo_registro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Id_medico)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Id_clinica)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Id_paciente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Id_inyeccion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cuestionario)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Codigo_registro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id_medico)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id_clinica)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id_paciente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id_inyeccion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cuestionario)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

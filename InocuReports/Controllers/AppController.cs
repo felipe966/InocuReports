@@ -29,6 +29,24 @@ namespace InocuReports.Controllers
 
             return View(reportes);
         }
+        public ActionResult Reportes()
+        {
+            IEnumerable<Reporte> reportes = null;
+            HttpClient hc = new HttpClient();
+            hc.BaseAddress = new Uri("https://localhost:44384/api/reporte");
+            var consumeapi = hc.GetAsync("reporte");
+            consumeapi.Wait();
+
+            var read = consumeapi.Result;
+            if (read.IsSuccessStatusCode)
+            {
+                var data = read.Content.ReadAsAsync<IList<Reporte>>();
+                data.Wait();
+                reportes = data.Result;
+            }
+
+            return View(reportes);
+        }
 
         public ActionResult Medicos()
         {
@@ -53,7 +71,7 @@ namespace InocuReports.Controllers
         {
             IEnumerable<Clinica> clinica = null;
             HttpClient hc = new HttpClient();
-            hc.BaseAddress = new Uri("https://localhost:44384/api/medico");
+            hc.BaseAddress = new Uri("https://localhost:44384/api/clinica");
             var consumeapi = hc.GetAsync("clinica");
             consumeapi.Wait();
 
@@ -66,6 +84,44 @@ namespace InocuReports.Controllers
             }
 
             return View(clinica);
+        }
+
+        public ActionResult Pacientes()
+        {
+            IEnumerable<Paciente> paciente = null;
+            HttpClient hc = new HttpClient();
+            hc.BaseAddress = new Uri("https://localhost:44384/api/paciente");
+            var consumeapi = hc.GetAsync("paciente");
+            consumeapi.Wait();
+
+            var read = consumeapi.Result;
+            if (read.IsSuccessStatusCode)
+            {
+                var data = read.Content.ReadAsAsync<IList<Paciente>>();
+                data.Wait();
+                paciente = data.Result;
+            }
+
+            return View(paciente);
+        }
+
+        public ActionResult Inyecciones()
+        {
+            IEnumerable<Inyeccion> inyeccion = null;
+            HttpClient hc = new HttpClient();
+            hc.BaseAddress = new Uri("https://localhost:44384/api/paciente");
+            var consumeapi = hc.GetAsync("inyeccion");
+            consumeapi.Wait();
+
+            var read = consumeapi.Result;
+            if (read.IsSuccessStatusCode)
+            {
+                var data = read.Content.ReadAsAsync<IList<Inyeccion>>();
+                data.Wait();
+                inyeccion = data.Result;
+            }
+
+            return View(inyeccion);
         }
 
         // GET: App/Details/5
@@ -103,13 +159,13 @@ namespace InocuReports.Controllers
                 return View();
             }
         }
-        // GET: App/Paso1
+        // GET: App/Paso2
         public ActionResult Paso2()
         {
             return View();
         }
 
-        // POST: App/Paso1
+        // POST: App/Paso2
         [HttpPost]
         public ActionResult Paso2(Clinica obj)
         {
@@ -124,6 +180,96 @@ namespace InocuReports.Controllers
                 if (data.IsSuccessStatusCode)
                 {
                     return RedirectToAction("Clinicas");
+                }
+                return View();
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: App/Paso3
+        public ActionResult Paso3()
+        {
+            return View();
+        }
+
+        // POST: App/Paso3
+        [HttpPost]
+        public ActionResult Paso3(Paciente obj)
+        {
+            try
+            {
+                HttpClient hc = new HttpClient();
+                hc.BaseAddress = new Uri("https://localhost:44384/api/");
+                var consumeapi = hc.PostAsJsonAsync<Paciente>("paciente", obj);
+                consumeapi.Wait();
+
+                var data = consumeapi.Result;
+                if (data.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Paso4");
+                }
+                return View();
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: App/Paso4
+        public ActionResult Paso4()
+        {
+            return View();
+        }
+
+        // POST: App/Paso4
+        [HttpPost]
+        public ActionResult Paso4(Inyeccion obj)
+        {
+            try
+            {
+                HttpClient hc = new HttpClient();
+                hc.BaseAddress = new Uri("https://localhost:44384/api/");
+                var consumeapi = hc.PostAsJsonAsync<Inyeccion>("inyeccion", obj);
+                consumeapi.Wait();
+
+                var data = consumeapi.Result;
+                if (data.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Paso5");
+                }
+                return View();
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: App/Paso5
+        public ActionResult Paso5()
+        {
+            return View();
+        }
+
+        // POST: App/Paso5
+        [HttpPost]
+        public ActionResult Paso5(Reporte obj)
+        {
+            try
+            {
+                HttpClient hc = new HttpClient();
+                hc.BaseAddress = new Uri("https://localhost:44384/api/");
+                var consumeapi = hc.PostAsJsonAsync<Reporte>("reporte", obj);
+                consumeapi.Wait();
+
+                var data = consumeapi.Result;
+                if (data.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Reportes");
                 }
                 return View();
             }

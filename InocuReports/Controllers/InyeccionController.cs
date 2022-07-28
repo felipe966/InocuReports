@@ -12,9 +12,9 @@ namespace InocuReports.Controllers
     {
         InyeccionAdmin InyeccionAdmin = new InyeccionAdmin();
         // GET: api/Inyeccion
-        public string Get()
+        public IEnumerable<Inyeccion> Get()
         {
-            return "Not implemented";
+            return InyeccionAdmin.GetInyecciones();
         }
 
         // GET: api/Inyeccion/5
@@ -24,8 +24,10 @@ namespace InocuReports.Controllers
         }
 
         // POST: api/Inyeccion
-        public void Post([FromBody]string value)
+        public IHttpActionResult GuardarPaciente(Inyeccion nuevo)
         {
+            InyeccionAdmin.Guardar(nuevo);
+            return Ok();
         }
 
         // PUT: api/Inyeccion/5

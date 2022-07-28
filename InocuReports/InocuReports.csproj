@@ -239,6 +239,12 @@
     <Content Include="Views\App\Paso1.cshtml" />
     <Content Include="Views\App\Clinicas.cshtml" />
     <Content Include="Views\App\Paso2.cshtml" />
+    <Content Include="Views\App\Pacientes.cshtml" />
+    <Content Include="Views\App\Paso3.cshtml" />
+    <Content Include="Views\App\Inyecciones.cshtml" />
+    <Content Include="Views\App\Reportes.cshtml" />
+    <Content Include="Views\App\Paso4.cshtml" />
+    <Content Include="Views\App\Paso5.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

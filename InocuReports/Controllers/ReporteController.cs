@@ -24,8 +24,10 @@ namespace InocuReports.Controllers
         }
 
         // POST: api/Reporte
-        public void Post([FromBody]string value)
+        public IHttpActionResult GuardarPaciente(Reporte nuevo)
         {
+            ReporteAdmin.Guardar(nuevo);
+            return Ok();
         }
 
         // PUT: api/Reporte/5

@@ -80,5 +80,44 @@ namespace InocuReports.Controllers
             }
             return lista;
         }
+        public IEnumerable<Inyeccion> GetInyecciones()
+        {
+            List<Inyeccion> lista = new List<Inyeccion>();
+            Conectar();
+            try
+            {
+                SqlCommand comando = new SqlCommand("GetInyecciones", cnn);
+                comando.CommandType = System.Data.CommandType.StoredProcedure;
+                SqlDataReader reader = comando.ExecuteReader();
+                while (reader.Read())
+                {
+                    Inyeccion modelo = new Inyeccion()
+                    {
+                        Id = (int)reader[0],
+                        Nombre = reader[1] + "",
+                        Marca = reader[2] + "",
+                        Fecha_aplicacion = reader[3] + "",
+                        Numero_lote = reader[4] + "",
+                        Fecha_vencimiento = reader[5] + "",
+                        Lugar_aplicacion = reader[6] + "",
+                        Observaciones = reader[7] + "",
+                        Cuestionario = reader[8] + ""
+                    };
+                    lista.Add(modelo);
+                }
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.StackTrace);
+            }
+            finally
+            {
+                Desconectar();
+
+
+            }
+            return lista.AsEnumerable();
+        }
     }
 }

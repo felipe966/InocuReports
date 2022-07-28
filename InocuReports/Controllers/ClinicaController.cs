@@ -24,7 +24,7 @@ namespace InocuReports.Controllers
         }
 
         // POST: api/clinica
-        public IHttpActionResult GuardarMedico(Clinica nuevo)
+        public IHttpActionResult GuardarClinica(Clinica nuevo)
         {
             ClinicaAdmin.Guardar(nuevo);
             return Ok();
