@@ -127,12 +127,15 @@ namespace InocuReports.Controllers
         // GET: App/Details/5
         public ActionResult Details(int id)
         {
+            
             return View();
         }
 
         // GET: App/Paso1
         public ActionResult Paso1()
         {
+            Session["Codigo_registro"] = "COD-RE302158";
+            ViewBag.Codigo_registro = Session["Codigo_registro"];
             return View();
         }
 
@@ -150,6 +153,8 @@ namespace InocuReports.Controllers
                 var data = consumeapi.Result;
                 if (data.IsSuccessStatusCode)
                 {
+                    ViewBag.Codigo_registro= Session["Codigo_registro"];
+                    Session["Nombre_medico"]=obj.Nombre_completo;
                     return RedirectToAction("Paso2");
                 }
                 return View();
@@ -159,9 +164,12 @@ namespace InocuReports.Controllers
                 return View();
             }
         }
+
         // GET: App/Paso2
         public ActionResult Paso2()
         {
+            ViewBag.Codigo_registro = Session["Codigo_registro"];
+            ViewBag.Nombre_medico = Session["Nombre_medico"];
             return View();
         }
 
@@ -179,7 +187,10 @@ namespace InocuReports.Controllers
                 var data = consumeapi.Result;
                 if (data.IsSuccessStatusCode)
                 {
-                    return RedirectToAction("Clinicas");
+                    ViewBag.Codigo_registro = Session["Codigo_registro"];
+                    ViewBag.Nombre_medico = Session["Nombre_medico"];
+                    Session["Nombre_clinica"] = obj.Nombre;
+                    return RedirectToAction("Paso3");
                 }
                 return View();
             }
@@ -192,6 +203,9 @@ namespace InocuReports.Controllers
         // GET: App/Paso3
         public ActionResult Paso3()
         {
+            ViewBag.Codigo_registro = Session["Codigo_registro"];
+            ViewBag.Nombre_medico = Session["Nombre_medico"];
+            ViewBag.Nombre_clinica = Session["Nombre_clinica"];
             return View();
         }
 
@@ -209,6 +223,10 @@ namespace InocuReports.Controllers
                 var data = consumeapi.Result;
                 if (data.IsSuccessStatusCode)
                 {
+                    Session["Nombre_paciente"] = obj.Nombre;
+                    ViewBag.Codigo_registro = Session["Codigo_registro"];
+                    ViewBag.Nombre_medico = Session["Nombre_medico"];
+                    ViewBag.Nombre_clinica = Session["Nombre_clinica"];
                     return RedirectToAction("Paso4");
                 }
                 return View();
@@ -222,6 +240,10 @@ namespace InocuReports.Controllers
         // GET: App/Paso4
         public ActionResult Paso4()
         {
+            ViewBag.Codigo_registro = Session["Codigo_registro"];
+            ViewBag.Nombre_medico = Session["Nombre_medico"];
+            ViewBag.Nombre_clinica = Session["Nombre_clinica"];
+            ViewBag.Nombre_paciente=Session["Nombre_paciente"];
             return View();
         }
 
@@ -239,6 +261,11 @@ namespace InocuReports.Controllers
                 var data = consumeapi.Result;
                 if (data.IsSuccessStatusCode)
                 {
+                    Session["Nombre_inyeccion"] = obj.Nombre;
+                    ViewBag.Codigo_registro = Session["Codigo_registro"];
+                    ViewBag.Nombre_medico = Session["Nombre_medico"];
+                    ViewBag.Nombre_clinica = Session["Nombre_clinica"];
+                    ViewBag.Nombre_paciente = Session["Nombre_paciente"];
                     return RedirectToAction("Paso5");
                 }
                 return View();
@@ -252,6 +279,11 @@ namespace InocuReports.Controllers
         // GET: App/Paso5
         public ActionResult Paso5()
         {
+            ViewBag.Codigo_registro = Session["Codigo_registro"];
+            ViewBag.Nombre_medico = Session["Nombre_medico"];
+            ViewBag.Nombre_clinica = Session["Nombre_clinica"];
+            ViewBag.Nombre_paciente = Session["Nombre_paciente"];
+            ViewBag.Nombre_inyeccion = Session["Nombre_inyeccion"];
             return View();
         }
 

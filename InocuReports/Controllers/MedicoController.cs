@@ -19,9 +19,14 @@ namespace InocuReports.Controllers
         }
 
         // GET: api/Medico/5
-        public string Get(int id)
+        public Medico Get(string id)
         {
-            return "value";
+            return MedicoAdmin.GetMedicoByIdentificacion(id)[0];
+        }
+        // GET: api/Medico/codigo/5
+        public Medico GetByCodigo(string codigo)
+        {
+            return MedicoAdmin.GetMedicoByCodigoProfesional(codigo)[0];
         }
 
         // POST: api/Medico

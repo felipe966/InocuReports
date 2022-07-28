@@ -4,15 +4,19 @@
     ViewBag.Title = "Paso3";
 }
 
-<h2>Paso3</h2>
+<h1>Paso 3 </h1>
+<h2>Solicitud de Registro: @ViewBag.Codigo_registro</h2>
+<h4>Medico: @ViewBag.Nombre_medico</h4>
+<h4>Clinica: @ViewBag.Nombre_clinica</h4>
+<hr />
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>Paciente</h4>
+        <h4>Registro del Paciente</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">

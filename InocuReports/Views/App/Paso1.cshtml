@@ -4,21 +4,26 @@
     ViewBag.Title = "Paso1";
 }
 
-<h2>Paso1</h2>
+<h1>Paso 1 </h1>
+<h2>Solicitud de Registro: @ViewBag.Codigo_registro</h2>
+<hr />
 
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
+
+
+
+
     <div class="form-horizontal">
-        <h4>Medico</h4>
+        <h4>Registro del Medico</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.Identificacion, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Identificacion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Identificacion, new { htmlAttributes = new { @class = "form-control", @id = "Identificacion" } })
                 @Html.ValidationMessageFor(model => model.Identificacion, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -76,5 +81,61 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#Identificacion").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/api/medico",
+                        type: "GET",
+                        dataType: "json",
+                        data: { id: request.term },
+                        success: function (data) {
+
+                            $("#Identificacion").prop('disabled', true);
+
+
+                        },
+                        error: function (event) {
+                            $("#Identificacion").prop('disabled', false);
+                        }
+                    })
+                },
+                messages: {
+                    noResults: '',
+                    results: function (resultsCount) { }
+                }
+            });
+            $("#Codigo_profesional").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/api/medico",
+                        type: "GET",
+                        dataType: "json",
+                        data: { codigo: request.term },
+                        success: function (data) {
+
+                            document.getElementById('Nombre_completo').value = data.Nombre_completo;
+                            document.getElementById('Email').value = data.Email;
+                            document.getElementById('Pais').value = data.Pais;
+                            document.getElementById('Estado_provincia').value = data.Estado_provincia;
+
+
+                        },
+                        error: function (event) {
+                            $("#Identificacion").prop('disabled', false);
+                        }
+                    })
+                },
+                messages: {
+                    noResults: '',
+                    results: function (resultsCount) { }
+                }
+            });
+
+        })
+    </script>
+
 }
