@@ -10,6 +10,9 @@ namespace InocuReports.Controllers
 {
     public class AppController : Controller
     {
+        
+        
+        
         // GET: App
         public ActionResult Index()
         {
@@ -240,10 +243,16 @@ namespace InocuReports.Controllers
         // GET: App/Paso4
         public ActionResult Paso4()
         {
-            ViewBag.Codigo_registro = Session["Codigo_registro"];
-            ViewBag.Nombre_medico = Session["Nombre_medico"];
-            ViewBag.Nombre_clinica = Session["Nombre_clinica"];
-            ViewBag.Nombre_paciente=Session["Nombre_paciente"];
+            Session["InyPreg1"] ="¿Ha tenido COVID previo a inyectarse?";
+            Session["InyPreg2"] ="¿Ha tenido sospecha de haber tenido COVID antes de ponerte la inyección ?";
+            Session["InyPreg3"] = "¿Ha tenido COVID después de tomar la inyección?";
+            Session["InyPreg4"] = "¿Razón de inyectarse contra COVID?";
+            Session["InyPreg5"] = "¿Estaba embarazada al inyectarse contra COVID? (Si aplica)";
+            Session["InyPreg6"] = "¿Ha tenido reacciones a vacunas en el pasado?";
+            Session["InyPreg7"] = "Especifique las reacciones a vacunas en el pasado";
+            Session["InyPreg8"] = "Medicamentos actuales con receta, enumere todos los medicamentos y las dosis";
+            Session["InyPreg9"] = "Nuevos medicamentos recetados que tuvieron que ser iniciados después de la(s) inyección(es) de COVID";
+
             return View();
         }
 
@@ -251,6 +260,9 @@ namespace InocuReports.Controllers
         [HttpPost]
         public ActionResult Paso4(Inyeccion obj)
         {
+
+             Session["InyPreg1"].ToString(), Request["rsp_1"].ToString(), Session["InyPreg2"].ToString(), Request["rsp_2"].ToString(), Session["InyPreg3"].ToString(), Request["rsp_3"].ToString(), Session["InyPreg4"].ToString(), Request["rsp_4"].ToString(), Session["InyPreg5"].ToString(), Request["rsp_5"].ToString(), Session["InyPreg6"].ToString(), Request["rsp_6"].ToString(), Session["InyPreg7"].ToString(), Request["rsp_7"].ToString(), Session["InyPreg8"].ToString(), Request["rsp_8"].ToString(), Session["InyPreg9"].ToString(), Request["rsp_9"].ToString());
+            Session["Cuestionario_inyeccion"] = json_string;
             try
             {
                 HttpClient hc = new HttpClient();
@@ -266,6 +278,7 @@ namespace InocuReports.Controllers
                     ViewBag.Nombre_medico = Session["Nombre_medico"];
                     ViewBag.Nombre_clinica = Session["Nombre_clinica"];
                     ViewBag.Nombre_paciente = Session["Nombre_paciente"];
+                    ViewBag.Cuestionario_inyeccion = Session["Cuestionario_inyeccion"];
                     return RedirectToAction("Paso5");
                 }
                 return View();
@@ -284,6 +297,7 @@ namespace InocuReports.Controllers
             ViewBag.Nombre_clinica = Session["Nombre_clinica"];
             ViewBag.Nombre_paciente = Session["Nombre_paciente"];
             ViewBag.Nombre_inyeccion = Session["Nombre_inyeccion"];
+            ViewBag.Cuestionario_inyeccion = Session["Cuestionario_inyeccion"];
             return View();
         }
 
