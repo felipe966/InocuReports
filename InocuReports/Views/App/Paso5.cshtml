@@ -5,12 +5,11 @@
 }
 
 <h1>Paso 5 </h1>
-<h2>Solicitud de Registro: @ViewBag.Codigo_registro</h2>
-<h3>Paciente: @ViewBag.Nombre_paciente</h3>
-<h4>Medico: @ViewBag.Nombre_medico</h4>
-<h4>Clinica: @ViewBag.Nombre_clinica</h4>
-<h4>Inyeccion: @ViewBag.Nombre_inyeccion</h4>
-<h4>Cuestionario: @Session["Cuestionario_inyeccion"]</h4>
+<h2>Solicitud de Registro: @Session["Codigo_registro"]</h2>
+<h3>Paciente: @Session["Nombre_paciente"]</h3>
+<h4>Medico: @Session["Nombre_medico"]</h4>
+<h4>Clinica: @Session["Nombre_clinica"]</h4>
+<h4>Inyeccion: @Session["Nombre_inyeccion"]</h4>
 <hr />
 
 @using (Html.BeginForm())
@@ -18,56 +17,78 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Reporte</h4>
+        <h2>Efectos adversos</h2>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Codigo_registro, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Codigo_registro, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Codigo_registro, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        @using (Ajax.BeginForm("GuardarCuestionarioP4", "Paso4",
+                            new AjaxOptions { UpdateTargetId = "divCuestionario" }))
+        {
+            <hr />
+            <h2>Cuestionario</h2>
+            <div id="divCuestionario"></div>
+            <div class="form-group">
+                <ol>
+                    <li>
+                        <label>@Session["EfecPreg1"].ToString()</label><br />
+                        @Html.ListBox("rsp_1", new List<SelectListItem>{
+                            new SelectListItem{ Text="Seleccione", Value = "NR" },
+                            new SelectListItem{ Text="Medicamentos", Value = "Medicamentos" },
+                            new SelectListItem{ Text="Polietilenglicol", Value = "Polietilenglicol" },
+                            new SelectListItem{ Text="Alimentos", Value = "Alimentos" },
+                            new SelectListItem{ Text="Medio ambiente", Value = "Medio ambiente" },
+                            new SelectListItem{ Text="Otros", Value = "Otros" },
+                        }, new { @class = "listbox" })
+                    </li>
+                    <li>
+                        <label>@Session["EfecPreg2"].ToString()</label><br />
+                        @Html.TextArea("rsp_2")
+                    </li>
+                    <li>
+                        <label>@Session["EfecPreg3"].ToString()</label><br />
+                        @Html.DropDownList("rsp_3", new List<MultiSelectList>
+                        {
+                        new SelectListItem{ Text="Seleccione", Value = "NR" },
+                        new SelectListItem{ Text="Medicamentos", Value = "Medicamentos" },
+                        new SelectListItem{ Text="Polietilenglicol", Value = "Polietilenglicol" },
+                        new SelectListItem{ Text="Alimentos", Value = "Alimentos" },
+                        new SelectListItem{ Text="Medio ambiente", Value = "Medio ambiente" },
+                        new SelectListItem{ Text="Otros", Value = "Otros" },
+                        })
+                    </li>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Id_medico, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Id_medico, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Id_medico, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <li>
+                        <label>@Session["EfecPreg4"].ToString()</label><br />
+                        @Html.TextArea("rsp_4")
+                    </li>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Id_clinica, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Id_clinica, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Id_clinica, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <li>
+                        <label>@Session["EfecPreg5"].ToString()</label><br />
+                        @Html.DropDownList("rsp_5", new List<SelectListItem>
+                            {
+                            new SelectListItem{ Text="Seleccione", Value = "NR" },
+                            new SelectListItem{ Text="Si", Value = "Si" },
+                            new SelectListItem{ Text="No", Value = "No" }
+                        })
+                    </li>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Id_paciente, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Id_paciente, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Id_paciente, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <li>
+                        <label>@Session["EfecPreg6"].ToString()</label><br />
+                        @Html.TextArea("rsp_6")
+                    </li>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Id_inyeccion, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Id_inyeccion, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Id_inyeccion, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <li>
+                        <label>@Session["EfecPreg7"].ToString()</label><br />
+                        @Html.TextArea("rsp_7")
+                    </li>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Cuestionario, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Cuestionario, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Cuestionario, "", new { @class = "text-danger" })
+                    <li>
+                        <label>@Session["EfecPreg8"].ToString()</label><br />
+                        @Html.TextArea("rsp_8")
+                    </li>
+
+                </ol>
             </div>
-        </div>
+        }
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -77,10 +98,23 @@
     </div>
 }
 
+
+
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <link href="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css" />
+    <script src="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('.listbox').multiselect({
+                includeSelectAllOption: true
+            });
+        });
+    </script>
 }

@@ -5,8 +5,8 @@
 }
 
 <h1>Paso 2 </h1>
-<h2>Solicitud de Registro: @ViewBag.Codigo_registro</h2>
-<h4>Medico: @ViewBag.Nombre_medico</h4>
+<h2>Solicitud de Registro: @Session["Codigo_registro"]</h2>
+<h4>Medico: @Session["Nombre_medico"]</h4>
 <hr />
 
 @using (Html.BeginForm())

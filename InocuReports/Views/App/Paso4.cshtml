@@ -16,7 +16,7 @@
     @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
-    <h4>Registro de la Inyeccion</h4>
+    <h2>Registro de la Inyeccion</h2>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
@@ -84,45 +84,70 @@
         <div class="form-group">
             <ol>
                 <li>
-                    <label>@Session["InyPreg1"].ToString()</label>
-                    @Html.TextBox("rsp_1")
+                    <label>@Session["InyPreg1"].ToString()</label><br />
+                    @Html.DropDownList("rsp_1", new List<SelectListItem>
+                        {
+                        new SelectListItem{ Text="Seleccione", Value = "NR" },
+                        new SelectListItem{ Text="Si", Value = "Si" },
+                        new SelectListItem{ Text="No", Value = "No" }
+                    })
                 </li>
                 <li>
-                    <label>@Session["InyPreg2"].ToString()</label>
-                    @Html.TextBox("rsp_2")
+                    <label>@Session["InyPreg2"].ToString()</label><br />
+                    @Html.DropDownList("rsp_2", new List<SelectListItem>
+                        {
+                        new SelectListItem{ Text="Seleccione", Value = "NR" },
+                        new SelectListItem{ Text="Si", Value = "Si" },
+                        new SelectListItem{ Text="No", Value = "No" }
+                    })
                 </li>
                 <li>
-                    <label>@Session["InyPreg3"].ToString()</label>
-                    @Html.TextBox("rsp_3")
+                    <label>@Session["InyPreg3"].ToString()</label><br />
+                    @Html.DropDownList("rsp_3", new List<SelectListItem>
+                        {
+                        new SelectListItem{ Text="Seleccione", Value = "NR" },
+                        new SelectListItem{ Text="Si", Value = "Si" },
+                        new SelectListItem{ Text="No", Value = "No" }
+                    })
                 </li>
 
                 <li>
-                    <label>@Session["InyPreg4"].ToString()</label>
+                    <label>@Session["InyPreg4"].ToString()</label><br />
                     @Html.TextArea("rsp_4")
                 </li>
 
                 <li>
-                    <label>@Session["InyPreg5"].ToString()</label>
-                    @Html.TextBox("rsp_5")
+                    <label>@Session["InyPreg5"].ToString()</label><br />
+                    @Html.DropDownList("rsp_5", new List<SelectListItem>
+                        {
+                        new SelectListItem{ Text="Seleccione", Value = "NR" },
+                        new SelectListItem{ Text="Si", Value = "Si" },
+                        new SelectListItem{ Text="No", Value = "No" }
+                    })
                 </li>
 
                 <li>
-                    <label>@Session["InyPreg6"].ToString()</label>
-                    @Html.TextBox("rsp_6")
+                    <label>@Session["InyPreg6"].ToString()</label><br />
+                    @Html.DropDownList("rsp_6", new List<SelectListItem>
+                        {
+                        new SelectListItem{ Text="Seleccione", Value = "NR" },
+                        new SelectListItem{ Text="Si", Value = "Si" },
+                        new SelectListItem{ Text="No", Value = "No" }
+                    })
                 </li>
 
                 <li>
-                    <label>@Session["InyPreg7"].ToString()</label>
-                    @Html.TextBox("rsp_7")
+                    <label>@Session["InyPreg7"].ToString()</label><br />
+                    @Html.TextArea("rsp_7")
                 </li>
 
                 <li>
-                    <label>@Session["InyPreg8"].ToString()</label>
-                    @Html.TextBox("rsp_8")
+                    <label>@Session["InyPreg8"].ToString()</label><br />
+                    @Html.TextArea("rsp_8")
                 </li>
                 <li>
-                    <label>@Session["InyPreg9"].ToString()</label>
-                    @Html.TextBox("rsp_9")
+                    <label>@Session["InyPreg9"].ToString()</label><br />
+                    @Html.TextArea("rsp_9")
                 </li>
 
             </ol>

@@ -5,14 +5,16 @@ using System.Web;
 using System.Web.Mvc;
 using InocuReports.Models;
 using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace InocuReports.Controllers
 {
     public class AppController : Controller
     {
-        
-        
-        
+
+        IDictionary<string, string> Cuestionario_inyeccion = new Dictionary<string, string>();
+        IDictionary<string, string> Cuestionario_reporte = new Dictionary<string, string>();
+
         // GET: App
         public ActionResult Index()
         {
@@ -138,7 +140,6 @@ namespace InocuReports.Controllers
         public ActionResult Paso1()
         {
             Session["Codigo_registro"] = "COD-RE302158";
-            ViewBag.Codigo_registro = Session["Codigo_registro"];
             return View();
         }
 
@@ -156,7 +157,6 @@ namespace InocuReports.Controllers
                 var data = consumeapi.Result;
                 if (data.IsSuccessStatusCode)
                 {
-                    ViewBag.Codigo_registro= Session["Codigo_registro"];
                     Session["Nombre_medico"]=obj.Nombre_completo;
                     return RedirectToAction("Paso2");
                 }
@@ -171,8 +171,6 @@ namespace InocuReports.Controllers
         // GET: App/Paso2
         public ActionResult Paso2()
         {
-            ViewBag.Codigo_registro = Session["Codigo_registro"];
-            ViewBag.Nombre_medico = Session["Nombre_medico"];
             return View();
         }
 
@@ -190,8 +188,6 @@ namespace InocuReports.Controllers
                 var data = consumeapi.Result;
                 if (data.IsSuccessStatusCode)
                 {
-                    ViewBag.Codigo_registro = Session["Codigo_registro"];
-                    ViewBag.Nombre_medico = Session["Nombre_medico"];
                     Session["Nombre_clinica"] = obj.Nombre;
                     return RedirectToAction("Paso3");
                 }
@@ -206,9 +202,6 @@ namespace InocuReports.Controllers
         // GET: App/Paso3
         public ActionResult Paso3()
         {
-            ViewBag.Codigo_registro = Session["Codigo_registro"];
-            ViewBag.Nombre_medico = Session["Nombre_medico"];
-            ViewBag.Nombre_clinica = Session["Nombre_clinica"];
             return View();
         }
 
@@ -227,9 +220,6 @@ namespace InocuReports.Controllers
                 if (data.IsSuccessStatusCode)
                 {
                     Session["Nombre_paciente"] = obj.Nombre;
-                    ViewBag.Codigo_registro = Session["Codigo_registro"];
-                    ViewBag.Nombre_medico = Session["Nombre_medico"];
-                    ViewBag.Nombre_clinica = Session["Nombre_clinica"];
                     return RedirectToAction("Paso4");
                 }
                 return View();
@@ -260,9 +250,18 @@ namespace InocuReports.Controllers
         [HttpPost]
         public ActionResult Paso4(Inyeccion obj)
         {
+            Cuestionario_inyeccion.Add(Session["InyPreg1"].ToString(), Request["rsp_1"].ToString());
+            Cuestionario_inyeccion.Add(Session["InyPreg2"].ToString(), Request["rsp_2"].ToString());
+            Cuestionario_inyeccion.Add(Session["InyPreg3"].ToString(), Request["rsp_3"].ToString());
+            Cuestionario_inyeccion.Add(Session["InyPreg4"].ToString(), Request["rsp_4"].ToString());
+            Cuestionario_inyeccion.Add(Session["InyPreg5"].ToString(), Request["rsp_5"].ToString());
+            Cuestionario_inyeccion.Add(Session["InyPreg6"].ToString(), Request["rsp_6"].ToString());
+            Cuestionario_inyeccion.Add(Session["InyPreg7"].ToString(), Request["rsp_7"].ToString());
+            Cuestionario_inyeccion.Add(Session["InyPreg8"].ToString(), Request["rsp_8"].ToString());
+            Cuestionario_inyeccion.Add(Session["InyPreg9"].ToString(), Request["rsp_9"].ToString());
 
-             Session["InyPreg1"].ToString(), Request["rsp_1"].ToString(), Session["InyPreg2"].ToString(), Request["rsp_2"].ToString(), Session["InyPreg3"].ToString(), Request["rsp_3"].ToString(), Session["InyPreg4"].ToString(), Request["rsp_4"].ToString(), Session["InyPreg5"].ToString(), Request["rsp_5"].ToString(), Session["InyPreg6"].ToString(), Request["rsp_6"].ToString(), Session["InyPreg7"].ToString(), Request["rsp_7"].ToString(), Session["InyPreg8"].ToString(), Request["rsp_8"].ToString(), Session["InyPreg9"].ToString(), Request["rsp_9"].ToString());
-            Session["Cuestionario_inyeccion"] = json_string;
+            Session["Cuestionario_inyeccion"] = JsonConvert.SerializeObject(Cuestionario_inyeccion);
+            obj.Cuestionario = Session["Cuestionario_inyeccion"].ToString();
             try
             {
                 HttpClient hc = new HttpClient();
@@ -274,11 +273,6 @@ namespace InocuReports.Controllers
                 if (data.IsSuccessStatusCode)
                 {
                     Session["Nombre_inyeccion"] = obj.Nombre;
-                    ViewBag.Codigo_registro = Session["Codigo_registro"];
-                    ViewBag.Nombre_medico = Session["Nombre_medico"];
-                    ViewBag.Nombre_clinica = Session["Nombre_clinica"];
-                    ViewBag.Nombre_paciente = Session["Nombre_paciente"];
-                    ViewBag.Cuestionario_inyeccion = Session["Cuestionario_inyeccion"];
                     return RedirectToAction("Paso5");
                 }
                 return View();
@@ -292,12 +286,14 @@ namespace InocuReports.Controllers
         // GET: App/Paso5
         public ActionResult Paso5()
         {
-            ViewBag.Codigo_registro = Session["Codigo_registro"];
-            ViewBag.Nombre_medico = Session["Nombre_medico"];
-            ViewBag.Nombre_clinica = Session["Nombre_clinica"];
-            ViewBag.Nombre_paciente = Session["Nombre_paciente"];
-            ViewBag.Nombre_inyeccion = Session["Nombre_inyeccion"];
-            ViewBag.Cuestionario_inyeccion = Session["Cuestionario_inyeccion"];
+            Session["EfecPreg1"] = "Resultado del evento adverso o de los síntomas (marque todo lo que corresponda)";
+            Session["EfecPreg2"] = "¿Se mantiene los síntomas?";
+            Session["EfecPreg3"] = "¿Alergias conocidas?";
+            Session["EfecPreg4"] = "Descripción de alergias conocidas";
+            Session["EfecPreg5"] = "Nuevas enfermedades desde su inyección";
+            Session["EfecPreg6"] = "Especifique otras condiciones";
+            Session["EfecPreg7"] = "¿Si ha desarrollado un nuevo cáncer o la reaparición de un cáncer existente después de la inyección de COVID, especifique el tipo de cáncer?";
+            Session["EfecPreg8"] = "¿Desde la inyección de COVID, ha tenido alguno de los siguientes síntomas ?";
             return View();
         }
 
