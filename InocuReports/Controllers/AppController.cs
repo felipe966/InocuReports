@@ -294,7 +294,13 @@ namespace InocuReports.Controllers
             Session["EfecPreg6"] = "Especifique otras condiciones";
             Session["EfecPreg7"] = "¿Si ha desarrollado un nuevo cáncer o la reaparición de un cáncer existente después de la inyección de COVID, especifique el tipo de cáncer?";
             Session["EfecPreg8"] = "¿Desde la inyección de COVID, ha tenido alguno de los siguientes síntomas ?";
-            return View();
+            var mv = new Reporte();
+            mv.Opts_1 = GeneraOpt_1();
+            mv.Opts_3 = GeneraOpt_1();
+            mv.Opts_5 = GeneraOpt_1();
+            mv.Opts_8 = GeneraOpt_1();
+            return View(mv);
+
         }
 
         // POST: App/Paso5
@@ -364,5 +370,32 @@ namespace InocuReports.Controllers
                 return View();
             }
         }
+
+        public List<Option> GeneraOpt_1()
+        {
+            List<Option> opts = new List<Option>();
+            opts.Add(new Option { text = "Visita al médico o a la consulta de otro profesional de la salud" });
+            opts.Add(new Option { text = "Visita a la sala de emergencias o al centro de atención urgente" });
+            opts.Add(new Option { text = "Hospitalización" });
+            opts.Add(new Option { text = "Hospitalización prolongada (inyección de COVID recibida en el hospital)" });
+            opts.Add(new Option { text = "Enfermedad que pone en peligro la vida" });
+            opts.Add(new Option { text = "Incapacidad o daño permanente" });
+            opts.Add(new Option { text = "Paciente fallecido" });
+            opts.Add(new Option { text = "Anomalía congénita o defecto de nacimiento" });
+            opts.Add(new Option { text = "Aborto espontáneo o nacimiento sin vida" });
+            opts.Add(new Option { text = "Ninguna de las anteriores" });
+            return opts;
+
+        }
+        public List<Option> GeneraOpt_3()
+        {
+
+        }
+        public List<Option> GeneraOpt_5()
+        {
+        }
+
+        public List<Option> GeneraOpt_8()
+        {
+        }
     }
-}

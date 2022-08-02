@@ -175,6 +175,7 @@
     <Compile Include="Models\Clinica.cs" />
     <Compile Include="Models\Inyeccion.cs" />
     <Compile Include="Models\Medico.cs" />
+    <Compile Include="Models\Option.cs" />
     <Compile Include="Models\Paciente.cs" />
     <Compile Include="Models\Reporte.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
