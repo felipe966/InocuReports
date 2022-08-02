@@ -132,7 +132,7 @@ namespace InocuReports.Controllers
         // GET: App/Details/5
         public ActionResult Details(int id)
         {
-            
+
             return View();
         }
 
@@ -157,7 +157,7 @@ namespace InocuReports.Controllers
                 var data = consumeapi.Result;
                 if (data.IsSuccessStatusCode)
                 {
-                    Session["Nombre_medico"]=obj.Nombre_completo;
+                    Session["Nombre_medico"] = obj.Nombre_completo;
                     return RedirectToAction("Paso2");
                 }
                 return View();
@@ -233,8 +233,8 @@ namespace InocuReports.Controllers
         // GET: App/Paso4
         public ActionResult Paso4()
         {
-            Session["InyPreg1"] ="¿Ha tenido COVID previo a inyectarse?";
-            Session["InyPreg2"] ="¿Ha tenido sospecha de haber tenido COVID antes de ponerte la inyección ?";
+            Session["InyPreg1"] = "¿Ha tenido COVID previo a inyectarse?";
+            Session["InyPreg2"] = "¿Ha tenido sospecha de haber tenido COVID antes de ponerte la inyección ?";
             Session["InyPreg3"] = "¿Ha tenido COVID después de tomar la inyección?";
             Session["InyPreg4"] = "¿Razón de inyectarse contra COVID?";
             Session["InyPreg5"] = "¿Estaba embarazada al inyectarse contra COVID? (Si aplica)";
@@ -296,8 +296,8 @@ namespace InocuReports.Controllers
             Session["EfecPreg8"] = "¿Desde la inyección de COVID, ha tenido alguno de los siguientes síntomas ?";
             var mv = new Reporte();
             mv.Opts_1 = GeneraOpt_1();
-            mv.Opts_3 = GeneraOpt_1();
-            mv.Opts_5 = GeneraOpt_1();
+            mv.Opts_3 = GeneraOpt_3();
+            mv.Opts_5 = GeneraOpt_5();
             mv.Opts_8 = GeneraOpt_1();
             return View(mv);
 
@@ -389,13 +389,96 @@ namespace InocuReports.Controllers
         }
         public List<Option> GeneraOpt_3()
         {
+            List<Option> opts = new List<Option>();
+            opts.Add(new Option { text = "Medicamentos" });
+            opts.Add(new Option { text = "Polietilenglicol" });
+            opts.Add(new Option { text = "Alimentos" });
+            opts.Add(new Option { text = "Medio ambiente" });
+            opts.Add(new Option { text = "Otros" });
+            return opts;
 
         }
         public List<Option> GeneraOpt_5()
         {
+            List<Option> opts = new List<Option>();
+            opts.Add(new Option { text = "Enfermedad de Addison" });
+            opts.Add(new Option { text = "Alergias" });
+            opts.Add(new Option { text = "Arritmias" });
+            opts.Add(new Option { text = "Fibrilación auricular" });
+            opts.Add(new Option { text = "Vasculitis autoinmune" });
+            opts.Add(new Option { text = "Parálisis de Bell (parálisis facial)" });
+            opts.Add(new Option { text = "Bronquitis" });
+            opts.Add(new Option { text = "Cáncer" });
+            opts.Add(new Option { text = "Enfermedad celíaca (intolerancia al gluten)" });
+            opts.Add(new Option { text = "Enfermedad renal crónica" });
+            opts.Add(new Option { text = "Insuficiencia cardíaca congestiva" });
+            opts.Add(new Option { text = "Enfermedad de Crohn" });
+            opts.Add(new Option { text = "TVP (coágulos de sangre)" });
+            opts.Add(new Option { text = "Diabetes" });
+            opts.Add(new Option { text = "Encefalitis (inflamación cerebral/dolores de cabeza)" });
+            opts.Add(new Option { text = "Epilepsia (convulsiones)" });
+            opts.Add(new Option { text = "Enfermedades del corazón" });
+            opts.Add(new Option { text = "Herpes tipo 1" });
+            opts.Add(new Option { text = "Herpes tipo 2" });
+            opts.Add(new Option { text = "VIH" });
+            opts.Add(new Option { text = "Hipertensión (presión arterial alta)" });
+            opts.Add(new Option { text = "Enfermedad inflamatoria intestinal" });
+            opts.Add(new Option { text = "Enfermedad renal aguda" });
+            opts.Add(new Option { text = "Enfermedad hepática" });
+            opts.Add(new Option { text = "Lupus" });
+            opts.Add(new Option { text = "Aborto espontáneo" });
+            opts.Add(new Option { text = "Esclerosis múltiple" });
+            opts.Add(new Option { text = "Miastenia gravis" });
+            opts.Add(new Option { text = "Infarto de miocardio (ataque al corazón)" });
+            opts.Add(new Option { text = "Miocarditis" });
+            opts.Add(new Option { text = "Osteoartritis" });
+            opts.Add(new Option { text = "Pericarditis" });
+            opts.Add(new Option { text = "Anemia perniciosa" });
+            opts.Add(new Option { text = "Neumonía" });
+            opts.Add(new Option { text = "Parto prematuro" });
+            opts.Add(new Option { text = "Psoriasis" });
+            opts.Add(new Option { text = "Artritis psoriásica" });
+            opts.Add(new Option { text = "Embolia pulmonar" });
+            opts.Add(new Option { text = "Artritis reumatoide" });
+            opts.Add(new Option { text = "Herpes zóster" });
+            opts.Add(new Option { text = "Síndrome de Sjogren" });
+            opts.Add(new Option { text = "Nacimiento sin vida" });
+            opts.Add(new Option { text = "Accidente cerebrovascular" });
+            opts.Add(new Option { text = "Ataques isquémicos transitorios (AIT)" });
+            opts.Add(new Option { text = "Trastorno de la tiroides" });
+            opts.Add(new Option { text = "Colitis ulcerosa" });
+            return opts;
         }
 
         public List<Option> GeneraOpt_8()
         {
+            List<Option> opts = new List<Option>();
+            opts.Add(new Option { text = "Medicamentos" });
+            opts.Add(new Option { text = "Medicamentos" });
+            opts.Add(new Option { text = "Medicamentos" });
+            opts.Add(new Option { text = "Medicamentos" });
+            opts.Add(new Option { text = "Medicamentos" });
+            opts.Add(new Option { text = "Medicamentos" });
+            opts.Add(new Option { text = "Medicamentos" });
+            opts.Add(new Option { text = "Medicamentos" });
+            opts.Add(new Option { text = "Medicamentos" });
+            opts.Add(new Option { text = "Medicamentos" });
+            opts.Add(new Option { text = "Medicamentos" });
+            opts.Add(new Option { text = "Medicamentos" });
+            opts.Add(new Option { text = "Medicamentos" });
+            opts.Add(new Option { text = "Medicamentos" });
+            opts.Add(new Option { text = "Medicamentos" });
+            opts.Add(new Option { text = "Medicamentos" });
+            opts.Add(new Option { text = "Medicamentos" });
+            opts.Add(new Option { text = "Medicamentos" });
+            opts.Add(new Option { text = "Medicamentos" });
+            opts.Add(new Option { text = "Medicamentos" });
+            opts.Add(new Option { text = "Medicamentos" });
+            opts.Add(new Option { text = "Medicamentos" });
+            opts.Add(new Option { text = "Medicamentos" });
+            opts.Add(new Option { text = "Medicamentos" });
+            return opts;
         }
+    }
+
     }
