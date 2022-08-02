@@ -34,8 +34,15 @@
                         @Html.DropDownListFor(model => model.Resp_opts_1, new SelectList(Model.Opts_1, "text", "text"), new { @multiple = "multiple", @placeholder = "Seleccione" })
                     </li>
                     <li>
-                        <label>@Session["EfecPreg2"].ToString()</label><br />
-                        @Html.TextArea("rsp_2")
+                        <div class="col-md-10">
+                            <label>@Session["EfecPreg2"].ToString()</label><br />
+                            @Html.DropDownList("rsp_2", new List<SelectListItem>
+                            {
+                                new SelectListItem{ Text="Seleccione", Value = "NR" },
+                                new SelectListItem{ Text="Si", Value = "Si" },
+                                new SelectListItem{ Text="No", Value = "No" }
+                            })
+                        </div>
                     </li>
                     <li>
                         <label>@Session["EfecPreg3"].ToString()</label><br />
@@ -64,7 +71,7 @@
 
                     <li>
                         <label>@Session["EfecPreg8"].ToString()</label><br />
-                        @Html.ListBoxFor(model => model.Resp_opts_8, new SelectList(Model.Opts_8, "text", "text"), new { @multiple = "multiple", @placeholder = "Seleccione" })
+                        @Html.DropDownListFor(model => model.Resp_opts_8, new SelectList(Model.Opts_8, "text", "text"), new { @multiple = "multiple", @placeholder = "Seleccione" })
                     </li>
 
                 </ol>
@@ -87,7 +94,6 @@
 
 @section Scripts {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.sumoselect/3.0.2/sumoselect.min.css">
-    <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.sumoselect/3.0.2/jquery.sumoselect.min.js"></script>
 
     <script>

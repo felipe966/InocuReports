@@ -298,7 +298,7 @@ namespace InocuReports.Controllers
             mv.Opts_1 = GeneraOpt_1();
             mv.Opts_3 = GeneraOpt_3();
             mv.Opts_5 = GeneraOpt_5();
-            mv.Opts_8 = GeneraOpt_1();
+            mv.Opts_8 = GeneraOpt_8();
             return View(mv);
 
         }
@@ -453,30 +453,29 @@ namespace InocuReports.Controllers
         public List<Option> GeneraOpt_8()
         {
             List<Option> opts = new List<Option>();
-            opts.Add(new Option { text = "Medicamentos" });
-            opts.Add(new Option { text = "Medicamentos" });
-            opts.Add(new Option { text = "Medicamentos" });
-            opts.Add(new Option { text = "Medicamentos" });
-            opts.Add(new Option { text = "Medicamentos" });
-            opts.Add(new Option { text = "Medicamentos" });
-            opts.Add(new Option { text = "Medicamentos" });
-            opts.Add(new Option { text = "Medicamentos" });
-            opts.Add(new Option { text = "Medicamentos" });
-            opts.Add(new Option { text = "Medicamentos" });
-            opts.Add(new Option { text = "Medicamentos" });
-            opts.Add(new Option { text = "Medicamentos" });
-            opts.Add(new Option { text = "Medicamentos" });
-            opts.Add(new Option { text = "Medicamentos" });
-            opts.Add(new Option { text = "Medicamentos" });
-            opts.Add(new Option { text = "Medicamentos" });
-            opts.Add(new Option { text = "Medicamentos" });
-            opts.Add(new Option { text = "Medicamentos" });
-            opts.Add(new Option { text = "Medicamentos" });
-            opts.Add(new Option { text = "Medicamentos" });
-            opts.Add(new Option { text = "Medicamentos" });
-            opts.Add(new Option { text = "Medicamentos" });
-            opts.Add(new Option { text = "Medicamentos" });
-            opts.Add(new Option { text = "Medicamentos" });
+            opts.Add(new Option { text = "Síntomas de COVID o Enfermedad de COVID" });
+            opts.Add(new Option { text = "Disminución del bienestar" });
+            opts.Add(new Option { text = "Disminución del estado de salud" });
+            opts.Add(new Option { text = "Fatiga extrema" });
+            opts.Add(new Option { text = "Incapacidad para participar en actividades rutinarias" });
+            opts.Add(new Option { text = "Pérdida de energía" });
+            opts.Add(new Option { text = "Dolor inexplicable" });
+            opts.Add(new Option { text = "Debilidad" });
+            opts.Add(new Option { text = "Fiebre inexplicable" });
+            opts.Add(new Option { text = "Sensaciones corporales inexplicables" });
+            opts.Add(new Option { text = "Sudores nocturnos" });
+            opts.Add(new Option { text = "Sofocos" });
+            opts.Add(new Option { text = "Intolerancia al frío" });
+            opts.Add(new Option { text = "Intolerancia al calor" });
+            opts.Add(new Option { text = "Sensibilidad a los cambios de temperatura" });
+            opts.Add(new Option { text = "Cambio en la capacidad de caminar" });
+            opts.Add(new Option { text = "Cambio en el pensamiento" });
+            opts.Add(new Option { text = "Ya no me siento como antes" });
+            opts.Add(new Option { text = "Aumento de peso inexplicable" });
+            opts.Add(new Option { text = "Pérdida de peso inexplicable" });
+            opts.Add(new Option { text = "Sueño fragmentado" });
+            opts.Add(new Option { text = "No puedo dormir" });
+            opts.Add(new Option { text = "Insomnio" });
             return opts;
         }
     }
