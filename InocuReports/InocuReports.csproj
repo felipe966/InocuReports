@@ -256,6 +256,7 @@
     <Content Include="Views\App\Reportes.cshtml" />
     <Content Include="Views\App\Paso4.cshtml" />
     <Content Include="Views\App\Paso5.cshtml" />
+    <Content Include="Views\App\Comprobante.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

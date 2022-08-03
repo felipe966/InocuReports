@@ -10,8 +10,9 @@ namespace InocuReports.Controllers
 {
     public class ClinicaAdmin:Conexion
     {
-        public void Guardar(Clinica modelo)
+        public int  Guardar(Clinica modelo)
         {
+            int new_id = 404;
             Conectar();
             try
             {
@@ -27,7 +28,7 @@ namespace InocuReports.Controllers
                 comando.Parameters.Add(new SqlParameter("@estado_provincia", modelo.Estado_provincia));
                 comando.Parameters.Add(new SqlParameter("@telefono", modelo.Telefono));
                 comando.Parameters.Add(new SqlParameter("@sitio_web", modelo.Sitio_web));
-                comando.ExecuteNonQuery();
+                new_id = (int)comando.ExecuteScalar();
                 comando.Dispose();
             }
             catch (Exception e)
@@ -39,6 +40,7 @@ namespace InocuReports.Controllers
             {
                 Desconectar();
             }
+            return new_id;
         }
 
         public IEnumerable<Clinica> GetClinicaByNombre(string Nombre)
@@ -81,7 +83,7 @@ namespace InocuReports.Controllers
             }
             return lista.AsEnumerable();
         }
-        public IEnumerable<Clinica> GetClinicaByCedula(string Cedula_juridica)
+        public List<Clinica> GetClinicaByCedula(string Cedula_juridica)
         {
             List<Clinica> lista = new List<Clinica>();
             Conectar();
@@ -119,7 +121,7 @@ namespace InocuReports.Controllers
 
 
             }
-            return lista.AsEnumerable();
+            return lista;
         }
 
         public IEnumerable<Clinica> GetClinicas()
@@ -160,6 +162,43 @@ namespace InocuReports.Controllers
 
             }
             return lista.AsEnumerable();
+        }
+        public Clinica GetById(int id)
+        {
+            Clinica modelo = new Clinica();
+            Conectar();
+            try
+            {
+                SqlCommand command = new SqlCommand("select * from Clinica where Clinica.id=" + id + ";", cnn);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    modelo = new Clinica()
+                    {
+                        Id = (int)reader[0],
+                        Nombre = reader[1] + "",
+                        Cedula_juridica = reader[2] + "",
+                        Pais = reader[3] + "",
+                        Estado_provincia = reader[4] + "",
+                        Distrito = reader[5] + "",
+                        Telefono = reader[6] + "",
+                        Email = reader[5] + "",
+                        Sitio_web = reader[5] + ""
+                    };
+                }
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.StackTrace);
+            }
+            finally
+            {
+                Desconectar();
+
+
+            }
+            return modelo;
         }
     }
 }

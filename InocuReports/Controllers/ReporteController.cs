@@ -23,11 +23,26 @@ namespace InocuReports.Controllers
             return "value";
         }
 
+        // GET: api/Reporte/maxid
+        public int Get(string rq)
+        {
+            if (rq == "maxid")
+            {
+                int last_id = ReporteAdmin.GetLastId();
+                return last_id;
+            }
+            else
+            {
+                return 0;
+            }
+            
+        }
+
         // POST: api/Reporte
         public IHttpActionResult GuardarPaciente(Reporte nuevo)
         {
-            ReporteAdmin.Guardar(nuevo);
-            return Ok();
+            int new_id = ReporteAdmin.Guardar(nuevo);
+            return Ok(new_id);
         }
 
         // PUT: api/Reporte/5

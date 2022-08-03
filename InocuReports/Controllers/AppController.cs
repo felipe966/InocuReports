@@ -139,8 +139,29 @@ namespace InocuReports.Controllers
         // GET: App/Paso1
         public ActionResult Paso1()
         {
-            Session["Codigo_registro"] = "COD-RE302158";
+            HttpClient hc = new HttpClient();
+            hc.BaseAddress = new Uri("https://localhost:44384/api/reporte");
+            var consumeapi = hc.GetAsync("?rq=maxid");
+            consumeapi.Wait();
+
+            var read = consumeapi.Result;
+            if (read.IsSuccessStatusCode)
+            {
+                var readTask = read.Content.ReadAsAsync<int>();
+                readTask.Wait();
+                Session["Codigo_registro"] = "COD-RE"+(readTask.Result+1);
+                Session["Nombre_medico"] = "";
+
+            }
+            
             return View();
+        }
+
+        public ActionResult SetSession(string key, string value)
+        {
+            Session[key] = value;
+
+            return this.Json(new { success = true });
         }
 
         // POST: App/Paso1
@@ -149,17 +170,28 @@ namespace InocuReports.Controllers
         {
             try
             {
-                HttpClient hc = new HttpClient();
-                hc.BaseAddress = new Uri("https://localhost:44384/api/");
-                var consumeapi = hc.PostAsJsonAsync<Medico>("medico", obj);
-                consumeapi.Wait();
-
-                var data = consumeapi.Result;
-                if (data.IsSuccessStatusCode)
+                if (Session["Nombre_medico"].ToString() == obj.Nombre_completo)
                 {
-                    Session["Nombre_medico"] = obj.Nombre_completo;
                     return RedirectToAction("Paso2");
                 }
+                else
+                {
+                    HttpClient hc = new HttpClient();
+                    hc.BaseAddress = new Uri("https://localhost:44384/api/");
+                    var consumeapi = hc.PostAsJsonAsync<Medico>("medico", obj);
+                    consumeapi.Wait();
+
+                    var data = consumeapi.Result;
+                    if (data.IsSuccessStatusCode)
+                    {
+                        var readTask = data.Content.ReadAsAsync<int>();
+                        readTask.Wait();
+                        Session["Id_medico"]= readTask.Result;
+                        Session["Nombre_medico"] = obj.Nombre_completo;
+                        return RedirectToAction("Paso2");
+                    }
+                }
+                
                 return View();
             }
             catch
@@ -188,6 +220,9 @@ namespace InocuReports.Controllers
                 var data = consumeapi.Result;
                 if (data.IsSuccessStatusCode)
                 {
+                    var readTask = data.Content.ReadAsAsync<int>();
+                    readTask.Wait();
+                    Session["Id_clinica"]= readTask.Result;
                     Session["Nombre_clinica"] = obj.Nombre;
                     return RedirectToAction("Paso3");
                 }
@@ -219,6 +254,9 @@ namespace InocuReports.Controllers
                 var data = consumeapi.Result;
                 if (data.IsSuccessStatusCode)
                 {
+                    var readTask = data.Content.ReadAsAsync<int>();
+                    readTask.Wait();
+                    Session["Id_paciente"]= readTask.Result;
                     Session["Nombre_paciente"] = obj.Nombre;
                     return RedirectToAction("Paso4");
                 }
@@ -272,7 +310,10 @@ namespace InocuReports.Controllers
                 var data = consumeapi.Result;
                 if (data.IsSuccessStatusCode)
                 {
+                    var readTask = data.Content.ReadAsAsync<int>();
+                    readTask.Wait();
                     Session["Nombre_inyeccion"] = obj.Nombre;
+                    Session["Id_inyeccion"] = readTask.Result;
                     return RedirectToAction("Paso5");
                 }
                 return View();
@@ -307,6 +348,22 @@ namespace InocuReports.Controllers
         [HttpPost]
         public ActionResult Paso5(Reporte obj)
         {
+            Cuestionario_reporte.Add(Session["EfecPreg1"].ToString(), Request["Resp_opts_1"].ToString());
+            Cuestionario_reporte.Add(Session["EfecPreg2"].ToString(), Request["rsp_2"].ToString());
+            Cuestionario_reporte.Add(Session["EfecPreg3"].ToString(), Request["Resp_opts_3"].ToString());
+            Cuestionario_reporte.Add(Session["EfecPreg4"].ToString(), Request["rsp_4"].ToString());
+            Cuestionario_reporte.Add(Session["EfecPreg5"].ToString(), Request["Resp_opts_5"].ToString());
+            Cuestionario_reporte.Add(Session["EfecPreg6"].ToString(), Request["rsp_6"].ToString());
+            Cuestionario_reporte.Add(Session["EfecPreg7"].ToString(), Request["rsp_7"].ToString());
+            Cuestionario_reporte.Add(Session["EfecPreg8"].ToString(), Request["Resp_opts_8"].ToString());
+
+            Session["Cuestionario_reporte"] = JsonConvert.SerializeObject(Cuestionario_reporte);
+            obj.Cuestionario = Session["Cuestionario_reporte"].ToString();
+            obj.Codigo_registro = Session["Codigo_registro"].ToString();
+            obj.Id_medico = int.Parse(Session["Id_medico"].ToString());
+            obj.Id_clinica = int.Parse(Session["Id_clinica"].ToString());
+            obj.Id_paciente = int.Parse(Session["Id_paciente"].ToString());
+            obj.Id_inyeccion = int.Parse(Session["Id_paciente"].ToString());
             try
             {
                 HttpClient hc = new HttpClient();
@@ -317,7 +374,10 @@ namespace InocuReports.Controllers
                 var data = consumeapi.Result;
                 if (data.IsSuccessStatusCode)
                 {
-                    return RedirectToAction("Reportes");
+                    var readTask = data.Content.ReadAsAsync<int>();
+                    readTask.Wait();
+                    Session["Id_reporte"]= readTask.Result;
+                    return RedirectToAction("Comprobante");
                 }
                 return View();
             }
@@ -327,48 +387,91 @@ namespace InocuReports.Controllers
             }
         }
 
-        // GET: App/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Comprobante()
         {
+            ViewBag.Medico = GetMedicoByID(int.Parse(Session["Id_medico"].ToString()));
+            ViewBag.Clinica = GetClinicaByID((int)Session["Id_clinica"]);
+            ViewBag.Paciente = GetPacienteByID((int)Session["Id_paciente"]);
+            ViewBag.Inyeccion = GetInyeccionByID((int)Session["Id_inyeccion"]);
+            ViewBag.Datetime = DateTime.Now;
+            var cuestionario_inyec_dict = JsonConvert.DeserializeObject<Dictionary<string, string>>(Session["Cuestionario_inyeccion"].ToString());
+            var cuestionario_reporte_dict = JsonConvert.DeserializeObject<Dictionary<string, string>>(Session["Cuestionario_reporte"].ToString());
+            ViewBag.Cuestionario_inyec_dict = cuestionario_inyec_dict;
+            ViewBag.Cuestionario_reporte_dict= cuestionario_reporte_dict;
+
             return View();
         }
 
-        // POST: App/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public Medico GetMedicoByID(int id)
         {
-            try
-            {
-                // TODO: Add update logic here
+            Medico resultado = new Medico();
+            HttpClient hc = new HttpClient();
+            hc.BaseAddress = new Uri("https://localhost:44384/api/medico");
+            var consumeapi = hc.GetAsync("?id_medico="+ id);
+            consumeapi.Wait();
 
-                return RedirectToAction("Index");
-            }
-            catch
+            var read = consumeapi.Result;
+            if (read.IsSuccessStatusCode)
             {
-                return View();
+                var data = read.Content.ReadAsAsync<Medico>();
+                data.Wait();
+                resultado = data.Result;
             }
+            return resultado;
         }
 
-        // GET: App/Delete/5
-        public ActionResult Delete(int id)
+        public Clinica GetClinicaByID(int id)
         {
-            return View();
+            Clinica resultado = new Clinica();
+            HttpClient hc = new HttpClient();
+            hc.BaseAddress = new Uri("https://localhost:44384/api/clinica");
+            var consumeapi = hc.GetAsync("?id_clinica="+id);
+            consumeapi.Wait();
+
+            var read = consumeapi.Result;
+            if (read.IsSuccessStatusCode)
+            {
+                var data = read.Content.ReadAsAsync<Clinica>();
+                data.Wait();
+                resultado = data.Result;
+            }
+            return resultado;
         }
 
-        // POST: App/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public Paciente GetPacienteByID(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            Paciente resultado = new Paciente();
+            HttpClient hc = new HttpClient();
+            hc.BaseAddress = new Uri("https://localhost:44384/api/paciente");
+            var consumeapi = hc.GetAsync("?id=" + id);
+            consumeapi.Wait();
 
-                return RedirectToAction("Index");
-            }
-            catch
+            var read = consumeapi.Result;
+            if (read.IsSuccessStatusCode)
             {
-                return View();
+                var data = read.Content.ReadAsAsync<Paciente>();
+                data.Wait();
+                resultado = data.Result;
             }
+            return resultado;
+        }
+
+        public Inyeccion GetInyeccionByID(int id)
+        {
+            Inyeccion resultado = new Inyeccion();
+            HttpClient hc = new HttpClient();
+            hc.BaseAddress = new Uri("https://localhost:44384/api/inyeccion");
+            var consumeapi = hc.GetAsync("?id=" + id);
+            consumeapi.Wait();
+
+            var read = consumeapi.Result;
+            if (read.IsSuccessStatusCode)
+            {
+                var data = read.Content.ReadAsAsync<Inyeccion>();
+                data.Wait();
+                resultado = data.Result;
+            }
+            return resultado;
         }
 
         public List<Option> GeneraOpt_1()

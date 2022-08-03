@@ -18,16 +18,22 @@ namespace InocuReports.Controllers
         }
 
         // GET: api/Clinica/5
-        public string Get(int id)
+        public Clinica Get(string cedula)
         {
-            return "value";
+            return ClinicaAdmin.GetClinicaByCedula(cedula)[0];
+        }
+        
+
+        public Clinica Get(int id_clinica)
+        {
+            return ClinicaAdmin.GetById(id_clinica);
         }
 
         // POST: api/clinica
         public IHttpActionResult GuardarClinica(Clinica nuevo)
         {
-            ClinicaAdmin.Guardar(nuevo);
-            return Ok();
+            int new_id = ClinicaAdmin.Guardar(nuevo);
+            return Ok(new_id);
         }
 
         // PUT: api/Clinica/5

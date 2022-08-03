@@ -23,6 +23,10 @@ namespace InocuReports.Controllers
         {
             return MedicoAdmin.GetMedicoByIdentificacion(id)[0];
         }
+        public Medico Get(int id_medico)
+        {
+            return MedicoAdmin.GetById(id_medico);
+        }
         // GET: api/Medico/codigo/5
         public Medico GetByCodigo(string codigo)
         {
@@ -32,8 +36,8 @@ namespace InocuReports.Controllers
         // POST: api/Medico
         public IHttpActionResult GuardarMedico(Medico nuevo)
         {
-            MedicoAdmin.Guardar(nuevo);
-            return Ok();  
+            int new_id = MedicoAdmin.Guardar(nuevo);
+            return Ok(new_id);  
         }
 
         // PUT: api/Medico/5

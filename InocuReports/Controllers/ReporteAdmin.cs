@@ -10,8 +10,9 @@ namespace InocuReports.Controllers
 {
     public class ReporteAdmin:Conexion
     {
-        public void Guardar(Reporte modelo)
+        public int Guardar(Reporte modelo)
         {
+            int new_id = 404;
             Conectar();
             try
             {
@@ -25,7 +26,7 @@ namespace InocuReports.Controllers
                 comando.Parameters.Add(new SqlParameter("@id_paciente", modelo.Id_paciente));
                 comando.Parameters.Add(new SqlParameter("@id_inyeccion", modelo.Id_inyeccion));
                 comando.Parameters.Add(new SqlParameter("@cuestionario", modelo.Cuestionario));
-                comando.ExecuteNonQuery();
+                new_id = (int)comando.ExecuteScalar();
                 comando.Dispose();
             }
             catch (Exception e)
@@ -37,6 +38,30 @@ namespace InocuReports.Controllers
             {
                 Desconectar();
             }
+            return 404;
+        }
+
+        public int GetLastId()
+        {
+            int lastId=404;
+            Conectar();
+            try
+            {
+                SqlCommand command = new SqlCommand("select max(id) from Reporte ", cnn);
+                lastId = (int)command.ExecuteScalar();
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.StackTrace);
+            }
+            finally
+            {
+                Desconectar();
+
+
+            }
+            return lastId;
         }
 
         public IEnumerable<Reporte> GetReporteByCodigoRegistro(string Codigo_registro)

@@ -10,8 +10,9 @@ namespace InocuReports.Controllers
 {
     public class InyeccionAdmin:Conexion
     {
-        public void Guardar(Inyeccion modelo)
+        public int Guardar(Inyeccion modelo)
         {
+            int new_id = 404;
             Conectar();
             try
             {
@@ -27,7 +28,7 @@ namespace InocuReports.Controllers
                 comando.Parameters.Add(new SqlParameter("@lugar_aplicacion", modelo.Lugar_aplicacion));
                 comando.Parameters.Add(new SqlParameter("@observaciones", modelo.Observaciones));
                 comando.Parameters.Add(new SqlParameter("@cuestionario", modelo.Cuestionario));
-                comando.ExecuteNonQuery();
+                new_id = (int)comando.ExecuteScalar(); 
                 comando.Dispose();
             }
             catch (Exception e)
@@ -38,7 +39,9 @@ namespace InocuReports.Controllers
             finally
             {
                 Desconectar();
+                
             }
+            return new_id;
         }
         public List<Inyeccion> GetInyeccionById(int Id)
         {
@@ -118,6 +121,44 @@ namespace InocuReports.Controllers
 
             }
             return lista.AsEnumerable();
+        }
+
+        public Inyeccion GetById(int id)
+        {
+            Inyeccion modelo = new Inyeccion();
+            Conectar();
+            try
+            {
+                SqlCommand command = new SqlCommand("select * from Inyeccion where Inyeccion.id=" + id + ";", cnn);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    modelo = new Inyeccion()
+                    {
+                        Id = (int)reader[0],
+                        Nombre = reader[1] + "",
+                        Marca = reader[2] + "",
+                        Fecha_aplicacion = reader[3] + "",
+                        Numero_lote = reader[4] + "",
+                        Fecha_vencimiento = reader[5] + "",
+                        Lugar_aplicacion = reader[6] + "",
+                        Observaciones = reader[7] + "",
+                        Cuestionario = reader[8] + ""
+                    };
+                }
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.StackTrace);
+            }
+            finally
+            {
+                Desconectar();
+
+
+            }
+            return modelo;
         }
     }
 }

@@ -26,8 +26,8 @@ namespace InocuReports.Controllers
         // POST: api/Inyeccion
         public IHttpActionResult GuardarPaciente(Inyeccion nuevo)
         {
-            InyeccionAdmin.Guardar(nuevo);
-            return Ok();
+            int new_id=InyeccionAdmin.Guardar(nuevo);
+            return Ok(new_id);
         }
 
         // PUT: api/Inyeccion/5

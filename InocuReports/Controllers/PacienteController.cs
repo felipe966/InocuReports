@@ -18,16 +18,16 @@ namespace InocuReports.Controllers
         }
 
         // GET: api/Paciente/5
-        public string Get(int id)
+        public Paciente Get(int id)
         {
-            return "value";
+            return PacienteAdmin.GetById(id);
         }
 
         // POST: api/Paciente
         public IHttpActionResult GuardarPaciente(Paciente nuevo)
         {
-            PacienteAdmin.Guardar(nuevo);
-            return Ok();
+            int new_id = PacienteAdmin.Guardar(nuevo);
+            return Ok(new_id);
         }
 
 

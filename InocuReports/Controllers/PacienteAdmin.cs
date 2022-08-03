@@ -10,8 +10,9 @@ namespace InocuReports.Controllers
 {
     public class PacienteAdmin:Conexion
     {
-        public void Guardar(Paciente modelo)
+        public int Guardar(Paciente modelo)
         {
+            int new_id = 404;
             Conectar();
             try
             {
@@ -34,7 +35,7 @@ namespace InocuReports.Controllers
                 comando.Parameters.Add(new SqlParameter("@email", modelo.Email));
                 //comando.Parameters.Add(new SqlParameter("@fecha_registro", modelo.Fecha_registro));
                 comando.Parameters.Add(new SqlParameter("@ocupacion", modelo.Ocupacion));
-                comando.ExecuteNonQuery();
+                new_id = (int)comando.ExecuteScalar();
                 comando.Dispose();
             }
             catch (Exception e)
@@ -46,6 +47,7 @@ namespace InocuReports.Controllers
             {
                 Desconectar();
             }
+            return new_id;
         }
 
         public IEnumerable<Paciente> GetPacienteByIdentificacion(string Identificacion)
@@ -141,6 +143,51 @@ namespace InocuReports.Controllers
 
             }
             return lista.AsEnumerable();
+        }
+
+        public Paciente GetById(int id)
+        {
+            Paciente modelo = new Paciente();
+            Conectar();
+            try
+            {
+                SqlCommand command = new SqlCommand("select * from Paciente where Paciente.id=" + id + ";", cnn);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    modelo = new Paciente()
+                    {
+                        Id = (int)reader[0],
+                        Identificacion = reader[1] + "",
+                        Nombre = reader[2] + "",
+                        Primer_apellido = reader[3] + "",
+                        Segundo_apellido = reader[4] + "",
+                        Fecha_nacimiento = reader[5] + "",
+                        Sexo_natural = reader[6] + "",
+                        Telefono_contacto = reader[7] + "",
+                        Pais = reader[8] + "",
+                        Estado_provincia = reader[9] + "",
+                        Distrito = reader[10] + "",
+                        Estado_civil = reader[11] + "",
+                        Telefono_personal = reader[12] + "",
+                        Email = reader[13] + "",
+                        Fecha_registro = reader[14] + "",
+                        Ocupacion = reader[15] + ""
+                    };
+                }
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.StackTrace);
+            }
+            finally
+            {
+                Desconectar();
+
+
+            }
+            return modelo;
         }
     }
 }

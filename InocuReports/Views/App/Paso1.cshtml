@@ -121,7 +121,14 @@
                             document.getElementById('Email').value = data.Email;
                             document.getElementById('Pais').value = data.Pais;
                             document.getElementById('Estado_provincia').value = data.Estado_provincia;
-
+                            $(function () {
+                                $.post('/App/SetSession',
+                                    { key: "Nombre_medico", value: data.Nombre_completo });
+                            });
+                            $(function () {
+                                $.post('/App/SetSession',
+                                    { key: "Id_medico", value: data.Id });
+                            });
 
                         },
                         error: function (event) {
