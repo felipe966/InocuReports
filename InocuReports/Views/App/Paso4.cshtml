@@ -15,158 +15,178 @@
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h2>Registro de la Inyeccion</h2>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Marca, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Marca, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Marca, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Fecha_aplicacion, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Fecha_aplicacion, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Fecha_aplicacion, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Numero_lote, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Numero_lote, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Numero_lote, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Fecha_vencimiento, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Fecha_vencimiento, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Fecha_vencimiento, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Lugar_aplicacion, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Lugar_aplicacion, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Lugar_aplicacion, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Observaciones, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Observaciones, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Observaciones, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    @using (Ajax.BeginForm("GuardarCuestionarioP4", "Paso4",
-                            new AjaxOptions { UpdateTargetId = "divCuestionario" }))
-    {
+    <div class="form-horizontal">
+        <h2>Registro de la Inyeccion</h2>
         <hr />
-        <h2>Cuestionario</h2>
-        <div id="divCuestionario"></div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            <ol>
-                <li>
-                    <label>@Session["InyPreg1"].ToString()</label><br />
-                    @Html.DropDownList("rsp_1", new List<SelectListItem>
-                        {
-                        new SelectListItem{ Text="Seleccione", Value = "NR" },
-                        new SelectListItem{ Text="Si", Value = "Si" },
-                        new SelectListItem{ Text="No", Value = "No" }
-                    })
-                </li>
-                <li>
-                    <label>@Session["InyPreg2"].ToString()</label><br />
-                    @Html.DropDownList("rsp_2", new List<SelectListItem>
-                        {
-                        new SelectListItem{ Text="Seleccione", Value = "NR" },
-                        new SelectListItem{ Text="Si", Value = "Si" },
-                        new SelectListItem{ Text="No", Value = "No" }
-                    })
-                </li>
-                <li>
-                    <label>@Session["InyPreg3"].ToString()</label><br />
-                    @Html.DropDownList("rsp_3", new List<SelectListItem>
-                        {
-                        new SelectListItem{ Text="Seleccione", Value = "NR" },
-                        new SelectListItem{ Text="Si", Value = "Si" },
-                        new SelectListItem{ Text="No", Value = "No" }
-                    })
-                </li>
-
-                <li>
-                    <label>@Session["InyPreg4"].ToString()</label><br />
-                    @Html.TextArea("rsp_4")
-                </li>
-
-                <li>
-                    <label>@Session["InyPreg5"].ToString()</label><br />
-                    @Html.DropDownList("rsp_5", new List<SelectListItem>
-                        {
-                        new SelectListItem{ Text="Seleccione", Value = "NR" },
-                        new SelectListItem{ Text="Si", Value = "Si" },
-                        new SelectListItem{ Text="No", Value = "No" }
-                    })
-                </li>
-
-                <li>
-                    <label>@Session["InyPreg6"].ToString()</label><br />
-                    @Html.DropDownList("rsp_6", new List<SelectListItem>
-                        {
-                        new SelectListItem{ Text="Seleccione", Value = "NR" },
-                        new SelectListItem{ Text="Si", Value = "Si" },
-                        new SelectListItem{ Text="No", Value = "No" }
-                    })
-                </li>
-
-                <li>
-                    <label>@Session["InyPreg7"].ToString()</label><br />
-                    @Html.TextArea("rsp_7")
-                </li>
-
-                <li>
-                    <label>@Session["InyPreg8"].ToString()</label><br />
-                    @Html.TextArea("rsp_8")
-                </li>
-                <li>
-                    <label>@Session["InyPreg9"].ToString()</label><br />
-                    @Html.TextArea("rsp_9")
-                </li>
-
-            </ol>
-        </div>
-            }
-
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
+            @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
             </div>
         </div>
-    }
 
-    <div>
-        @Html.ActionLink("Back to List", "Index")
+        <div class="form-group">
+            @Html.LabelFor(model => model.Marca, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Marca, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Marca, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Fecha_aplicacion, "Fecha de aplicación", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Fecha_aplicacion, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                @Html.ValidationMessageFor(model => model.Fecha_aplicacion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Numero_lote, "Número de lote", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Numero_lote, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Numero_lote, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Fecha_vencimiento, "Fecha de vencimiento", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Fecha_vencimiento, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                @Html.ValidationMessageFor(model => model.Fecha_vencimiento, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Lugar_aplicacion, "Lugar de aplicación", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Lugar_aplicacion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Lugar_aplicacion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Observaciones, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Observaciones, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Observaciones, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @using (Ajax.BeginForm("GuardarCuestionarioP4", "Paso4",
+                                new AjaxOptions { UpdateTargetId = "divCuestionario" }))
+        {
+            <hr />
+            <h2>Cuestionario</h2>
+            <div id="divCuestionario"></div>
+            <div class="form-group">
+                <ol>
+                    <li>
+                        <label>@Session["InyPreg1"].ToString()</label><br />
+                        @Html.DropDownList("rsp_1", new List<SelectListItem>
+                            {
+                            new SelectListItem{ Text="Seleccione", Value = "NR" },
+                            new SelectListItem{ Text="Si", Value = "Si" },
+                            new SelectListItem{ Text="No", Value = "No" }
+                        })
+                    </li>
+                    <br />
+                    <li>
+                        <label>@Session["InyPreg2"].ToString()</label><br />
+                        @Html.DropDownList("rsp_2", new List<SelectListItem>
+                            {
+                            new SelectListItem{ Text="Seleccione", Value = "NR" },
+                            new SelectListItem{ Text="Si", Value = "Si" },
+                            new SelectListItem{ Text="No", Value = "No" }
+                        })
+                    </li>
+                    <br />
+                    <li>
+                        <label>@Session["InyPreg3"].ToString()</label><br />
+                        @Html.DropDownList("rsp_3", new List<SelectListItem>
+                            {
+                            new SelectListItem{ Text="Seleccione", Value = "NR" },
+                            new SelectListItem{ Text="Si", Value = "Si" },
+                            new SelectListItem{ Text="No", Value = "No" }
+                        })
+                    </li>
+                    <br />
+
+                    <li>
+                        <label>@Session["InyPreg4"].ToString()</label><br />
+                        @Html.TextArea("rsp_4")
+                    </li>
+                    <br />
+
+                    <li>
+                        <label>@Session["InyPreg5"].ToString()</label><br />
+                        @Html.DropDownList("rsp_5", new List<SelectListItem>
+                            {
+                            new SelectListItem{ Text="Seleccione", Value = "NR" },
+                            new SelectListItem{ Text="Si", Value = "Si" },
+                            new SelectListItem{ Text="No", Value = "No" }
+                        })
+                    </li>
+                    <br />
+
+                    <li>
+                        <label>@Session["InyPreg6"].ToString()</label><br />
+                        @Html.DropDownList("rsp_6", new List<SelectListItem>
+                            {
+                            new SelectListItem{ Text="Seleccione", Value = "NR" },
+                            new SelectListItem{ Text="Si", Value = "Si" },
+                            new SelectListItem{ Text="No", Value = "No" }
+                        })
+                    </li>
+                    <br />
+
+                    <li>
+                        <label>@Session["InyPreg7"].ToString()</label><br />
+                        @Html.TextArea("rsp_7")
+                    </li>
+                    <br />
+
+                    <li>
+                        <label>@Session["InyPreg8"].ToString()</label><br />
+                        @Html.TextArea("rsp_8")
+                    </li>
+                    <br />
+                    <li>
+                        <label>@Session["InyPreg9"].ToString()</label><br />
+                        @Html.TextArea("rsp_9")
+                    </li>
+                    <br />
+
+                </ol>
+            </div>
+        }
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar" class="btn btn-default" />
+            </div>
+        </div>
     </div>
+}
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
+<div>
+    @Html.ActionLink("Regresar al Inicio", "Paso1")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".datepicker").datepicker({
+                dateFormat: "dd/mm/yy",
+                changemonth: true,
+                changeyear: true
+            });
+        });
+    </script>
+}
