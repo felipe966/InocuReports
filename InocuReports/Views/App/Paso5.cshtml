@@ -32,7 +32,7 @@
                     <li>
                         <div>
                             <label>@Session["EfecPreg1"].ToString()</label><br />
-                            @Html.DropDownListFor(model => model.Resp_opts_1, new SelectList(Model.Opts_1, "text", "text"), new { @multiple = "multiple", @placeholder = "Seleccione" })
+                            @Html.DropDownListFor(model => model.Resp_opts_1, new SelectList(Model.Opts_1, "text", "text"), new { @multiple = "multiple", @placeholder = "Seleccione", required = "required" })
                         </div><br />
                     </li><br />
                     <li>
@@ -41,41 +41,40 @@
 
                             @Html.DropDownList("rsp_2", new List<SelectListItem>
                             {
-                                new SelectListItem{ Text="Seleccione", Value = "NR" },
                                 new SelectListItem{ Text="Si", Value = "Si" },
                                 new SelectListItem{ Text="No", Value = "No" }
-                            })
+                            }, "Seleccione", new { required = "required" })
                         </div><br />
                     </li><br />
                     <li>
                         <label>@Session["EfecPreg3"].ToString()</label><br />
-                        @Html.DropDownListFor(model => model.Resp_opts_3, new SelectList(Model.Opts_3, "text", "text"), new { @multiple = "multiple", @placeholder = "Seleccione" })
+                        @Html.DropDownListFor(model => model.Resp_opts_3, new SelectList(Model.Opts_3, "text", "text"), new { @multiple = "multiple", @placeholder = "Seleccione", required = "required" })
                         
                     </li><br />
 
                     <li>
                         <label>@Session["EfecPreg4"].ToString()</label><br />
-                        @Html.TextArea("rsp_4")
+                        @Html.TextArea("rsp_4",null, new { required = "required" })
                     </li><br />
 
                     <li>
                         <label>@Session["EfecPreg5"].ToString()</label><br />
-                        @Html.DropDownListFor(model => model.Resp_opts_5, new SelectList(Model.Opts_5, "text", "text"), new { @multiple = "multiple", @placeholder = "Seleccione" })
+                        @Html.DropDownListFor(model => model.Resp_opts_5, new SelectList(Model.Opts_5, "text", "text"), new { @multiple = "multiple", @placeholder = "Seleccione", required = "required" })
                     </li><br />
 
                     <li>
                         <label>@Session["EfecPreg6"].ToString()</label><br />
-                        @Html.TextArea("rsp_6")
+                        @Html.TextArea("rsp_6", null, new { required = "required" })
                     </li><br />
 
                     <li>
                         <label>@Session["EfecPreg7"].ToString()</label><br />
-                        @Html.TextArea("rsp_7")
+                        @Html.TextArea("rsp_7", null, new { required = "required" })
                     </li><br />
 
                     <li>
                         <label>@Session["EfecPreg8"].ToString()</label><br />
-                        @Html.DropDownListFor(model => model.Resp_opts_8, new SelectList(Model.Opts_8, "text", "text"), new { @multiple = "multiple", @placeholder = "Seleccione" })
+                        @Html.DropDownListFor(model => model.Resp_opts_8, new SelectList(Model.Opts_8, "text", "text"), new { @multiple = "multiple", @placeholder = "Seleccione", required = "required" })
                     </li>
 
                 </ol>

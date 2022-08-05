@@ -168,36 +168,40 @@ namespace InocuReports.Controllers
         [HttpPost]
         public ActionResult Paso1(Medico obj)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (Session["Nombre_medico"].ToString() == obj.Nombre_completo)
+                try
                 {
-                    return RedirectToAction("Paso2");
-                }
-                else
-                {
-                    HttpClient hc = new HttpClient();
-                    hc.BaseAddress = new Uri("https://localhost:44384/api/");
-                    var consumeapi = hc.PostAsJsonAsync<Medico>("medico", obj);
-                    consumeapi.Wait();
-
-                    var data = consumeapi.Result;
-                    if (data.IsSuccessStatusCode)
+                    if (Session["Nombre_medico"].ToString() == obj.Nombre_completo)
                     {
-                        var readTask = data.Content.ReadAsAsync<int>();
-                        readTask.Wait();
-                        Session["Id_medico"]= readTask.Result;
-                        Session["Nombre_medico"] = obj.Nombre_completo;
                         return RedirectToAction("Paso2");
                     }
+                    else
+                    {
+                        HttpClient hc = new HttpClient();
+                        hc.BaseAddress = new Uri("https://localhost:44384/api/");
+                        var consumeapi = hc.PostAsJsonAsync<Medico>("medico", obj);
+                        consumeapi.Wait();
+
+                        var data = consumeapi.Result;
+                        if (data.IsSuccessStatusCode)
+                        {
+                            var readTask = data.Content.ReadAsAsync<int>();
+                            readTask.Wait();
+                            Session["Id_medico"] = readTask.Result;
+                            Session["Nombre_medico"] = obj.Nombre_completo;
+                            return RedirectToAction("Paso2");
+                        }
+                    }
+
+                    return View();
                 }
-                
-                return View();
+                catch
+                {
+                    return View();
+                }
             }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
 
         // GET: App/Paso2
@@ -210,33 +214,50 @@ namespace InocuReports.Controllers
         [HttpPost]
         public ActionResult Paso2(Clinica obj)
         {
-            try
+            if (ModelState.IsValid)
             {
-                HttpClient hc = new HttpClient();
-                hc.BaseAddress = new Uri("https://localhost:44384/api/");
-                var consumeapi = hc.PostAsJsonAsync<Clinica>("clinica", obj);
-                consumeapi.Wait();
-
-                var data = consumeapi.Result;
-                if (data.IsSuccessStatusCode)
+                try
                 {
-                    var readTask = data.Content.ReadAsAsync<int>();
-                    readTask.Wait();
-                    Session["Id_clinica"]= readTask.Result;
-                    Session["Nombre_clinica"] = obj.Nombre;
-                    return RedirectToAction("Paso3");
+                    HttpClient hc = new HttpClient();
+                    hc.BaseAddress = new Uri("https://localhost:44384/api/");
+                    var consumeapi = hc.PostAsJsonAsync<Clinica>("clinica", obj);
+                    consumeapi.Wait();
+
+                    var data = consumeapi.Result;
+                    if (data.IsSuccessStatusCode)
+                    {
+                        var readTask = data.Content.ReadAsAsync<int>();
+                        readTask.Wait();
+                        Session["Id_clinica"] = readTask.Result;
+                        Session["Nombre_clinica"] = obj.Nombre;
+                        return RedirectToAction("Paso3");
+                    }
+                    return View();
                 }
-                return View();
+                catch
+                {
+                    return View();
+                }
             }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
 
         // GET: App/Paso3
         public ActionResult Paso3()
         {
+            List<SelectListItem> lst = new List<SelectListItem>();
+
+            lst.Add(new SelectListItem() { Text = "Hombre", Value = "Hombre" });
+            lst.Add(new SelectListItem() { Text = "Mujer", Value = "Mujer" });
+            ViewBag.Opt_sexo = lst;
+            lst = new List<SelectListItem>();
+            lst.Add(new SelectListItem() { Text = "Soltero/Soltera", Value = "Soltero/Soltera" });
+            lst.Add(new SelectListItem() { Text = "Casado/Casada", Value = "Casado/Casada" });
+            lst.Add(new SelectListItem() { Text = "Viudo/Viuda", Value = "Viudo/Viuda" });
+            lst.Add(new SelectListItem() { Text = "Divorciado/Divorciada", Value = "Divorciado/Divorciada" });
+            ViewBag.Opt_estado_civil = lst;
+
+
             return View();
         }
 
@@ -244,29 +265,34 @@ namespace InocuReports.Controllers
         [HttpPost]
         public ActionResult Paso3(Paciente obj)
         {
-            try
+            if (ModelState.IsValid)
             {
-                HttpClient hc = new HttpClient();
-                hc.BaseAddress = new Uri("https://localhost:44384/api/");
-                var consumeapi = hc.PostAsJsonAsync<Paciente>("paciente", obj);
-                consumeapi.Wait();
-
-                var data = consumeapi.Result;
-                if (data.IsSuccessStatusCode)
+                try
                 {
-                    var readTask = data.Content.ReadAsAsync<int>();
-                    readTask.Wait();
-                    Session["Id_paciente"]= readTask.Result;
-                    Session["Nombre_paciente"] = obj.Nombre;
-                    return RedirectToAction("Paso4");
+                    HttpClient hc = new HttpClient();
+                    hc.BaseAddress = new Uri("https://localhost:44384/api/");
+                    var consumeapi = hc.PostAsJsonAsync<Paciente>("paciente", obj);
+                    consumeapi.Wait();
+
+                    var data = consumeapi.Result;
+                    if (data.IsSuccessStatusCode)
+                    {
+                        var readTask = data.Content.ReadAsAsync<int>();
+                        readTask.Wait();
+                        Session["Id_paciente"] = readTask.Result;
+                        Session["Nombre_paciente"] = obj.Nombre;
+                        return RedirectToAction("Paso4");
+                    }
+                    return View();
                 }
-                return View();
+                catch
+                {
+                    return View();
+                }
             }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
+    
 
         // GET: App/Paso4
         public ActionResult Paso4()
@@ -300,28 +326,33 @@ namespace InocuReports.Controllers
 
             Session["Cuestionario_inyeccion"] = JsonConvert.SerializeObject(Cuestionario_inyeccion);
             obj.Cuestionario = Session["Cuestionario_inyeccion"].ToString();
-            try
+            if (ModelState.IsValid)
             {
-                HttpClient hc = new HttpClient();
-                hc.BaseAddress = new Uri("https://localhost:44384/api/");
-                var consumeapi = hc.PostAsJsonAsync<Inyeccion>("inyeccion", obj);
-                consumeapi.Wait();
-
-                var data = consumeapi.Result;
-                if (data.IsSuccessStatusCode)
+                try
                 {
-                    var readTask = data.Content.ReadAsAsync<int>();
-                    readTask.Wait();
-                    Session["Nombre_inyeccion"] = obj.Nombre;
-                    Session["Id_inyeccion"] = readTask.Result;
-                    return RedirectToAction("Paso5");
+                    HttpClient hc = new HttpClient();
+                    hc.BaseAddress = new Uri("https://localhost:44384/api/");
+                    var consumeapi = hc.PostAsJsonAsync<Inyeccion>("inyeccion", obj);
+                    consumeapi.Wait();
+
+                    var data = consumeapi.Result;
+                    if (data.IsSuccessStatusCode)
+                    {
+                        var readTask = data.Content.ReadAsAsync<int>();
+                        readTask.Wait();
+                        Session["Nombre_inyeccion"] = obj.Nombre;
+                        Session["Id_inyeccion"] = readTask.Result;
+                        return RedirectToAction("Paso5");
+                    }
+                    return View();
                 }
-                return View();
+                catch
+                {
+                    return View();
+                }
+
             }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
 
         // GET: App/Paso5

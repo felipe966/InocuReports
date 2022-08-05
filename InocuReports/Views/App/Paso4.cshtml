@@ -87,36 +87,33 @@
                         <label>@Session["InyPreg1"].ToString()</label><br />
                         @Html.DropDownList("rsp_1", new List<SelectListItem>
                             {
-                            new SelectListItem{ Text="Seleccione", Value = "NR" },
                             new SelectListItem{ Text="Si", Value = "Si" },
                             new SelectListItem{ Text="No", Value = "No" }
-                        })
+                        }, "Seleccione", new { required = "required" })
                     </li>
                     <br />
                     <li>
                         <label>@Session["InyPreg2"].ToString()</label><br />
                         @Html.DropDownList("rsp_2", new List<SelectListItem>
                             {
-                            new SelectListItem{ Text="Seleccione", Value = "NR" },
                             new SelectListItem{ Text="Si", Value = "Si" },
                             new SelectListItem{ Text="No", Value = "No" }
-                        })
+                        }, "Seleccione", new { required = "required" })
                     </li>
                     <br />
                     <li>
                         <label>@Session["InyPreg3"].ToString()</label><br />
                         @Html.DropDownList("rsp_3", new List<SelectListItem>
                             {
-                            new SelectListItem{ Text="Seleccione", Value = "NR" },
                             new SelectListItem{ Text="Si", Value = "Si" },
                             new SelectListItem{ Text="No", Value = "No" }
-                        })
+                        }, "Seleccione", new { required = "required" })
                     </li>
                     <br />
 
                     <li>
                         <label>@Session["InyPreg4"].ToString()</label><br />
-                        @Html.TextArea("rsp_4")
+                        @Html.TextArea("rsp_4", null, new { required = "required" })
                     </li>
                     <br />
 
@@ -124,10 +121,9 @@
                         <label>@Session["InyPreg5"].ToString()</label><br />
                         @Html.DropDownList("rsp_5", new List<SelectListItem>
                             {
-                            new SelectListItem{ Text="Seleccione", Value = "NR" },
                             new SelectListItem{ Text="Si", Value = "Si" },
                             new SelectListItem{ Text="No", Value = "No" }
-                        })
+                        }, "Seleccione", new { required = "required" })
                     </li>
                     <br />
 
@@ -135,27 +131,26 @@
                         <label>@Session["InyPreg6"].ToString()</label><br />
                         @Html.DropDownList("rsp_6", new List<SelectListItem>
                             {
-                            new SelectListItem{ Text="Seleccione", Value = "NR" },
                             new SelectListItem{ Text="Si", Value = "Si" },
                             new SelectListItem{ Text="No", Value = "No" }
-                        })
+                        }, "Seleccione", new { required = "required" })
                     </li>
                     <br />
 
                     <li>
                         <label>@Session["InyPreg7"].ToString()</label><br />
-                        @Html.TextArea("rsp_7")
+                        @Html.TextArea("rsp_7", null, new { required = "required" })
                     </li>
                     <br />
 
                     <li>
                         <label>@Session["InyPreg8"].ToString()</label><br />
-                        @Html.TextArea("rsp_8")
+                        @Html.TextArea("rsp_8", null, new { required = "required" })
                     </li>
                     <br />
                     <li>
                         <label>@Session["InyPreg9"].ToString()</label><br />
-                        @Html.TextArea("rsp_9")
+                        @Html.TextArea("rsp_9", null, new { required = "required" })
                     </li>
                     <br />
 
@@ -179,6 +174,7 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
     <script type="text/javascript">
         $(document).ready(function () {
