@@ -218,21 +218,28 @@ namespace InocuReports.Controllers
             {
                 try
                 {
-                    HttpClient hc = new HttpClient();
-                    hc.BaseAddress = new Uri("https://localhost:44384/api/");
-                    var consumeapi = hc.PostAsJsonAsync<Clinica>("clinica", obj);
-                    consumeapi.Wait();
-
-                    var data = consumeapi.Result;
-                    if (data.IsSuccessStatusCode)
+                    if (Session["Nombre_clinica"].ToString() == obj.Nombre)
                     {
-                        var readTask = data.Content.ReadAsAsync<int>();
-                        readTask.Wait();
-                        Session["Id_clinica"] = readTask.Result;
-                        Session["Nombre_clinica"] = obj.Nombre;
                         return RedirectToAction("Paso3");
                     }
-                    return View();
+                    else
+                    {
+                        HttpClient hc = new HttpClient();
+                        hc.BaseAddress = new Uri("https://localhost:44384/api/");
+                        var consumeapi = hc.PostAsJsonAsync<Clinica>("clinica", obj);
+                        consumeapi.Wait();
+
+                        var data = consumeapi.Result;
+                        if (data.IsSuccessStatusCode)
+                        {
+                            var readTask = data.Content.ReadAsAsync<int>();
+                            readTask.Wait();
+                            Session["Id_clinica"] = readTask.Result;
+                            Session["Nombre_clinica"] = obj.Nombre;
+                            return RedirectToAction("Paso3");
+                        }
+                        return View();
+                    }
                 }
                 catch
                 {
