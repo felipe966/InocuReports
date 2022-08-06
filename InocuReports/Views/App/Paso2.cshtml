@@ -86,7 +86,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="button" value="Saltar" class="btn btn-info" />
+                <input type="button" value="Saltar" class="btn btn-info" onclick="Saltar_clinica(); return false;" />
                 <input type="submit" value="Guardar" class="btn btn-default" />
             </div>
         </div>
@@ -144,5 +144,17 @@
             });
 
         })
+
+        function Saltar_clinica() {
+            $(function () {
+                $.post('/App/SetSession',
+                    { key: "Nombre_clinica", value: "Domicilio/Oficina" });
+            });
+            $(function () {
+                $.post('/App/SetSession',
+                    { key: "Id_clinica", value: 1 });
+            });
+            window.location = "/App/Paso3";
+        }
     </script>
 }
