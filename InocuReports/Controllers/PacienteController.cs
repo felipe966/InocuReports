@@ -23,6 +23,12 @@ namespace InocuReports.Controllers
             return PacienteAdmin.GetById(id);
         }
 
+        public Paciente Get(string identificacion)
+        {
+            return PacienteAdmin.GetPacienteByIdentificacion(identificacion)[0];
+        }
+
+
         // POST: api/Paciente
         public IHttpActionResult GuardarPaciente(Paciente nuevo)
         {

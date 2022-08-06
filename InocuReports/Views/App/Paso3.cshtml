@@ -164,5 +164,52 @@
                 changeyear: true
             });
         });
+        $(document).ready(function () {
+
+            $("#Identificacion").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/api/paciente",
+                        type: "GET",
+                        dataType: "json",
+                        data: { identificacion: request.term },
+                        success: function (data) {
+
+                            document.getElementById('Nombre').value = data.Nombre;
+                            document.getElementById('Primer_apellido').value = data.Primer_apellido;
+                            document.getElementById('Segundo_apellido').value = data.Segundo_apellido;
+                            document.getElementById('Fecha_nacimiento').value = data.Fecha_nacimiento;
+                            document.getElementById('Sexo_natural').value = data.Sexo_natural;
+                            document.getElementById('Telefono_contacto').value = data.Telefono_contacto;
+                            document.getElementById('Pais').value = data.Pais;
+                            document.getElementById('Estado_provincia').value = data.Estado_provincia;
+                            document.getElementById('Distrito').value = data.Distrito;
+                            document.getElementById('Estado_civil').value = data.Estado_civil;
+                            document.getElementById('Telefono_personal').value = data.Telefono_personal;
+                            document.getElementById('Email').value = data.Email;
+                            document.getElementById('Fecha_registro').value = data.Fecha_registro;
+                            document.getElementById('Ocupacion').value = data.Ocupacion;
+                            $(function () {
+                                $.post('/App/SetSession',
+                                    { key: "Nombre_paciente", value: data.Nombre });
+                            });
+                            $(function () {
+                                $.post('/App/SetSession',
+                                    { key: "Id_paciente", value: data.Id });
+                            });
+
+                        },
+                        error: function (event) {
+
+                        }
+                    })
+                },
+                messages: {
+                    noResults: '',
+                    results: function (resultsCount) { }
+                }
+            });
+
+        })
     </script>
 }
