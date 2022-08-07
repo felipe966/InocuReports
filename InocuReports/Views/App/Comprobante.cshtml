@@ -4,7 +4,7 @@
     ViewBag.Title = "Comprobante";
 }
 
-
+<div id="comprobante">
 <h2>Comprobante</h2>
 <div>
     <h4>Reporte</h4>
@@ -284,18 +284,18 @@
         </dd>
         @foreach (var c in ViewBag.Cuestionario_inyec_dict)
         {
-               
-                <dt>
-                    @c.Key
-                </dt>
 
-                <dd>
-                    @c.Value
-                </dd>
-               
+            <dt>
+                @c.Key
+            </dt>
+
+            <dd>
+                @c.Value
+            </dd>
+
         }
 
-        </dl>
+    </dl>
 </div>
 <div>
     <h4>Efectos Adversos</h4>
@@ -318,6 +318,30 @@
 
     </dl>
 </div>
+</div>
 <p>
-    @Html.ActionLink("Finalizar", "Index")
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="button" value="Finalizar" class="btn btn-info" onclick="Saltar_clinica(); return false;" />
+
+        </div>
+    </div>
 </p>
+@section Scripts {
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        function Saltar_clinica() {
+            var htmlString = document.getElementById("comprobante").innerHTML;
+            $(function () {
+                $.post('/App/Email',
+                    { recipient: '@ViewBag.Paciente.Email', subject: "Comprobante reporte efectos adversos inyecciones experimentales", body: htmlString });
+            });
+            $(function () {
+                $.post('/App/Email',
+                    { recipient: '@ViewBag.Medico.Email', subject: "Comprobante reporte efectos adversos inyecciones experimentales", body: htmlString });
+            });
+            window.location = "/Home/Index";
+        }
+    </script>
+}

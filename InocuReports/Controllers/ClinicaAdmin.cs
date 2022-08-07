@@ -64,8 +64,8 @@ namespace InocuReports.Controllers
                         Estado_provincia = reader[4] + "",
                         Distrito = reader[5] + "",
                         Telefono = reader[6] + "",
-                        Email = reader[5] + "",
-                        Sitio_web = reader[5] + ""
+                        Email = reader[7] + "",
+                        Sitio_web = reader[8] + ""
                     };
                     lista.Add(modelo);
                 }
@@ -104,8 +104,8 @@ namespace InocuReports.Controllers
                         Estado_provincia = reader[4] + "",
                         Distrito = reader[5] + "",
                         Telefono = reader[6] + "",
-                        Email = reader[5] + "",
-                        Sitio_web = reader[5] + ""
+                        Email = reader[7] + "",
+                        Sitio_web = reader[8] + ""
                     };
                     lista.Add(modelo);
                 }
@@ -144,8 +144,8 @@ namespace InocuReports.Controllers
                         Estado_provincia = reader[4] + "",
                         Distrito = reader[5] + "",
                         Telefono = reader[6] + "",
-                        Email = reader[5] + "",
-                        Sitio_web = reader[5] + ""
+                        Email = reader[7] + "",
+                        Sitio_web = reader[8] + ""
                     };
                     lista.Add(modelo);
                 }
@@ -182,8 +182,8 @@ namespace InocuReports.Controllers
                         Estado_provincia = reader[4] + "",
                         Distrito = reader[5] + "",
                         Telefono = reader[6] + "",
-                        Email = reader[5] + "",
-                        Sitio_web = reader[5] + ""
+                        Email = reader[7] + "",
+                        Sitio_web = reader[8] + ""
                     };
                 }
             }

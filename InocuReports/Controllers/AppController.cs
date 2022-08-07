@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using InocuReports.Models;
 using System.Net.Http;
 using Newtonsoft.Json;
+using System.Net.Mail;
+using System.Net;
 
 namespace InocuReports.Controllers
 {
@@ -157,6 +159,40 @@ namespace InocuReports.Controllers
             return View();
         }
 
+        public void SendEmail(string recipient, string subject,string body)
+        {
+            string email = "f334a0904ec4da08571fd73a30bed18e";
+            var smtpClient = new SmtpClient("in-v3.mailjet.com")
+            {
+                Port = 587,
+                Credentials = new NetworkCredential("f334a0904ec4da08571fd73a30bed18e", "249f9911325edc739a6801d027d515e0"),
+                EnableSsl = true,
+            };
+
+            smtpClient.Send("ovejaovejo@gmail.com", recipient, subject, body);
+        }
+
+        public ActionResult Email(string recipient, string subject, string body)
+        {
+            
+            var smtpClient = new SmtpClient("in-v3.mailjet.com")
+            {
+                Port = 587,
+                Credentials = new NetworkCredential("f334a0904ec4da08571fd73a30bed18e", "249f9911325edc739a6801d027d515e0"),
+                EnableSsl = true,
+            };
+            var mailMessage = new MailMessage
+            {
+                From = new MailAddress("ovejaovejo@gmail.com"),
+                Subject = subject,
+                Body = body,
+                IsBodyHtml = true,
+            };
+            mailMessage.To.Add(recipient);
+            smtpClient.Send(mailMessage);
+            return this.Json(new { success = true });
+        }
+
         public ActionResult SetSession(string key, string value)
         {
             Session[key] = value;
@@ -174,6 +210,7 @@ namespace InocuReports.Controllers
                 {
                     if (Session["Nombre_medico"].ToString() == obj.Nombre_completo)
                     {
+                        SendEmail(obj.Email, "Registro de medico en InocuReports", "Se ha registrado como medico para un reporte de efectos adversos de un medicamento");
                         return RedirectToAction("Paso2");
                     }
                     else
@@ -190,6 +227,7 @@ namespace InocuReports.Controllers
                             readTask.Wait();
                             Session["Id_medico"] = readTask.Result;
                             Session["Nombre_medico"] = obj.Nombre_completo;
+                            SendEmail(obj.Email, "Registro de medico en InocuReports", "Se ha registrado como medico para un reporte de efectos adversos de un medicamento");
                             return RedirectToAction("Paso2");
                         }
                     }
@@ -207,6 +245,7 @@ namespace InocuReports.Controllers
         // GET: App/Paso2
         public ActionResult Paso2()
         {
+            Session["Nombre_clinica"] = "";
             return View();
         }
 
@@ -220,6 +259,7 @@ namespace InocuReports.Controllers
                 {
                     if (Session["Nombre_clinica"].ToString() == obj.Nombre)
                     {
+                        SendEmail(obj.Email, "Registro de clinica en InocuReports", "Se ha registrado como clinica para un reporte de efectos adversos de un medicamento");
                         return RedirectToAction("Paso3");
                     }
                     else
@@ -236,6 +276,7 @@ namespace InocuReports.Controllers
                             readTask.Wait();
                             Session["Id_clinica"] = readTask.Result;
                             Session["Nombre_clinica"] = obj.Nombre;
+                            SendEmail(obj.Email, "Registro de clinica en InocuReports", "Se ha registrado como clinica para un reporte de efectos adversos de un medicamento");
                             return RedirectToAction("Paso3");
                         }
                         return View();
@@ -252,19 +293,9 @@ namespace InocuReports.Controllers
         // GET: App/Paso3
         public ActionResult Paso3()
         {
-            List<SelectListItem> lst = new List<SelectListItem>();
-
-            lst.Add(new SelectListItem() { Text = "Hombre", Value = "Hombre" });
-            lst.Add(new SelectListItem() { Text = "Mujer", Value = "Mujer" });
-            ViewBag.Opt_sexo = lst;
-            lst = new List<SelectListItem>();
-            lst.Add(new SelectListItem() { Text = "Soltero/Soltera", Value = "Soltero/Soltera" });
-            lst.Add(new SelectListItem() { Text = "Casado/Casada", Value = "Casado/Casada" });
-            lst.Add(new SelectListItem() { Text = "Viudo/Viuda", Value = "Viudo/Viuda" });
-            lst.Add(new SelectListItem() { Text = "Divorciado/Divorciada", Value = "Divorciado/Divorciada" });
-            ViewBag.Opt_estado_civil = lst;
 
 
+            Session["Nombre_paciente"] = "";
             return View();
         }
 
@@ -278,6 +309,7 @@ namespace InocuReports.Controllers
                 {
                     if (Session["Nombre_paciente"].ToString() == obj.Nombre)
                     {
+                        SendEmail(obj.Email, "Registro de paciente en InocuReports", "Se ha registrado como paciente para un reporte de efectos adversos de un medicamento");
                         return RedirectToAction("Paso4");
                     }
                     else
@@ -294,6 +326,7 @@ namespace InocuReports.Controllers
                             readTask.Wait();
                             Session["Id_paciente"] = readTask.Result;
                             Session["Nombre_paciente"] = obj.Nombre;
+                            SendEmail(obj.Email, "Registro de paciente en InocuReports", "Se ha registrado como paciente para un reporte de efectos adversos de un medicamento");
                             return RedirectToAction("Paso4");
                         }
                         return View();
@@ -435,9 +468,9 @@ namespace InocuReports.Controllers
         public ActionResult Comprobante()
         {
             ViewBag.Medico = GetMedicoByID(int.Parse(Session["Id_medico"].ToString()));
-            ViewBag.Clinica = GetClinicaByID((int)Session["Id_clinica"]);
-            ViewBag.Paciente = GetPacienteByID((int)Session["Id_paciente"]);
-            ViewBag.Inyeccion = GetInyeccionByID((int)Session["Id_inyeccion"]);
+            ViewBag.Clinica = GetClinicaByID(int.Parse(Session["Id_clinica"].ToString()));
+            ViewBag.Paciente = GetPacienteByID(int.Parse(Session["Id_paciente"].ToString()));
+            ViewBag.Inyeccion = GetInyeccionByID(int.Parse(Session["Id_inyeccion"].ToString()));
             ViewBag.Datetime = DateTime.Now;
             var cuestionario_inyec_dict = JsonConvert.DeserializeObject<Dictionary<string, string>>(Session["Cuestionario_inyeccion"].ToString());
             var cuestionario_reporte_dict = JsonConvert.DeserializeObject<Dictionary<string, string>>(Session["Cuestionario_reporte"].ToString());
