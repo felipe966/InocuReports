@@ -172,6 +172,7 @@ namespace InocuReports.Controllers
             smtpClient.Send("ovejaovejo@gmail.com", recipient, subject, body);
         }
 
+        [ValidateInput(false)]
         public ActionResult Email(string recipient, string subject, string body)
         {
             

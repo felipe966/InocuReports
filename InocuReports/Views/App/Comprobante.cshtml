@@ -5,324 +5,324 @@
 }
 
 <div id="comprobante">
-<h2>Comprobante</h2>
-<div>
-    <h4>Reporte</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Codigo de solicitud:
-        </dt>
-        <dd>
-            @Session["Codigo_registro"]
-        </dd>
-        <dt>
-            Fecha y hora:
-        </dt>
-        <dd>
-            @ViewBag.Datetime
-        </dd>
-    </dl>
-</div>
-<div>
-    <h4>Medico</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Nombre completo:
-        </dt>
-
-        <dd>
-            @ViewBag.Medico.Nombre_completo
-        </dd>
-
-        <dt>
-            Identificacion:
-        </dt>
-
-        <dd>
-            @ViewBag.Medico.Identificacion
-        </dd>
-        <dt>
-            Código profesional:
-        </dt>
-
-        <dd>
-            @ViewBag.Medico.Codigo_profesional
-        </dd>
-        <dt>
-            Email:
-        </dt>
-
-        <dd>
-            @ViewBag.Medico.Email
-        </dd>
-        <dt>
-            Pais:
-        </dt>
-
-        <dd>
-            @ViewBag.Medico.Pais
-        </dd>
-        <dt>
-            Estado/Provincia:
-        </dt>
-
-        <dd>
-            @ViewBag.Medico.Estado_provincia
-        </dd>
-
-    </dl>
-</div>
-<div>
-    <h4>Clinica</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Nombre:
-        </dt>
-
-        <dd>
-            @ViewBag.Clinica.Nombre
-        </dd>
-
-        <dt>
-            Cedula juridica:
-        </dt>
-
-        <dd>
-            @ViewBag.Clinica.Cedula_juridica
-        </dd>
-        <dt>
-            Pais:
-        </dt>
-
-        <dd>
-            @ViewBag.Clinica.Pais
-        </dd>
-        <dt>
-            Estado/Provincia:
-        </dt>
-
-        <dd>
-            @ViewBag.Clinica.Estado_provincia
-        </dd>
-        <dt>
-            Distrito:
-        </dt>
-
-        <dd>
-            @ViewBag.Clinica.Distrito
-        </dd>
-        <dt>
-            Email:
-        </dt>
-
-        <dd>
-            @ViewBag.Clinica.Email
-        </dd>
-        <dt>
-            Sitio web:
-        </dt>
-
-        <dd>
-            @ViewBag.Clinica.Sitio_web
-        </dd>
-
-    </dl>
-</div>
-<div>
-    <h4>Paciente</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Identificacion:
-        </dt>
-
-        <dd>
-            @ViewBag.Paciente.Identificacion
-        </dd>
-        <dt>
-            Nombre:
-        </dt>
-
-        <dd>
-            @ViewBag.Paciente.Nombre
-        </dd>
-        <dt>
-            Primer apellido:
-        </dt>
-
-        <dd>
-            @ViewBag.Paciente.Primer_apellido
-        </dd>
-        <dt>
-            Segundo apellido:
-        </dt>
-
-        <dd>
-            @ViewBag.Paciente.Segundo_apellido
-        </dd>
-        <dt>
-            Fecha de nacimiento:
-        </dt>
-        <dd>
-            @ViewBag.Paciente.Fecha_nacimiento
-        </dd>
-        <dt>
-            Sexo natural:
-        </dt>
-
-        <dd>
-            @ViewBag.Paciente.Sexo_natural
-        </dd>
-        <dt>
-            Telefono de contacto:
-        </dt>
-
-        <dd>
-            @ViewBag.Paciente.Telefono_contacto
-        </dd>
-
-        <dt>
-            Pais:
-        </dt>
-
-        <dd>
-            @ViewBag.Paciente.Pais
-        </dd>
-        <dt>
-            Estado/Provincia:
-        </dt>
-
-        <dd>
-            @ViewBag.Paciente.Estado_provincia
-        </dd>
-        <dt>
-            Distrito:
-        </dt>
-
-        <dd>
-            @ViewBag.Paciente.Distrito
-        </dd>
-        <dt>
-            Email:
-        </dt>
-
-        <dd>
-            @ViewBag.Paciente.Email
-        </dd>
-        <dt>
-            Fecha de registro:
-        </dt>
-
-        <dd>
-            @ViewBag.Paciente.Fecha_registro
-        </dd>
-        <dt>
-            Ocupacion:
-        </dt>
-
-        <dd>
-            @ViewBag.Paciente.Ocupacion
-        </dd>
-
-    </dl>
-</div>
-<div>
-    <h4>Inyeccion experimental</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Nombre completo:
-        </dt>
-
-        <dd>
-            @ViewBag.Inyeccion.Nombre
-        </dd>
-
-        <dt>
-            Marca:
-        </dt>
-
-        <dd>
-            @ViewBag.Inyeccion.Marca
-        </dd>
-        <dt>
-            Fecha de aplicacion:
-        </dt>
-
-        <dd>
-            @ViewBag.Inyeccion.Fecha_aplicacion
-        </dd>
-        <dt>
-            Numero de lote:
-        </dt>
-
-        <dd>
-            @ViewBag.Inyeccion.Numero_lote
-        <dt>
-            Fecha de vencimiento:
-        </dt>
-
-        <dd>
-            @ViewBag.Inyeccion.Fecha_vencimiento
-        </dd>
-        <dt>
-            Lugar de aplicacion:
-        </dt>
-
-        <dd>
-            @ViewBag.Inyeccion.Lugar_aplicacion
-        </dd>
-        <dt>
-            Observaciones:
-        </dt>
-
-        <dd>
-            @ViewBag.Inyeccion.Observaciones
-        </dd>
-        @foreach (var c in ViewBag.Cuestionario_inyec_dict)
-        {
-
+    <h2>Comprobante</h2>
+    <div>
+        <h4>Reporte</h4>
+        <hr />
+        <dl class="dl-horizontal">
             <dt>
-                @c.Key
+                Codigo de solicitud:
+            </dt>
+            <dd>
+                @Session["Codigo_registro"]
+            </dd>
+            <dt>
+                Fecha y hora:
+            </dt>
+            <dd>
+                @ViewBag.Datetime
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <h4>Medico</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Nombre completo:
             </dt>
 
             <dd>
-                @c.Value
+                @ViewBag.Medico.Nombre_completo
             </dd>
 
-        }
-
-    </dl>
-</div>
-<div>
-    <h4>Efectos Adversos</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        @foreach (var c in ViewBag.Cuestionario_reporte_dict)
-        {
-
             <dt>
-                @c.Key
+                Identificacion:
             </dt>
 
             <dd>
-                @c.Value
+                @ViewBag.Medico.Identificacion
+            </dd>
+            <dt>
+                Código profesional:
+            </dt>
+
+            <dd>
+                @ViewBag.Medico.Codigo_profesional
+            </dd>
+            <dt>
+                Email:
+            </dt>
+
+            <dd>
+                @ViewBag.Medico.Email
+            </dd>
+            <dt>
+                Pais:
+            </dt>
+
+            <dd>
+                @ViewBag.Medico.Pais
+            </dd>
+            <dt>
+                Estado/Provincia:
+            </dt>
+
+            <dd>
+                @ViewBag.Medico.Estado_provincia
             </dd>
 
-        }
+        </dl>
+    </div>
+    <div>
+        <h4>Clinica</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Nombre:
+            </dt>
+
+            <dd>
+                @ViewBag.Clinica.Nombre
+            </dd>
+
+            <dt>
+                Cedula juridica:
+            </dt>
+
+            <dd>
+                @ViewBag.Clinica.Cedula_juridica
+            </dd>
+            <dt>
+                Pais:
+            </dt>
+
+            <dd>
+                @ViewBag.Clinica.Pais
+            </dd>
+            <dt>
+                Estado/Provincia:
+            </dt>
+
+            <dd>
+                @ViewBag.Clinica.Estado_provincia
+            </dd>
+            <dt>
+                Distrito:
+            </dt>
+
+            <dd>
+                @ViewBag.Clinica.Distrito
+            </dd>
+            <dt>
+                Email:
+            </dt>
+
+            <dd>
+                @ViewBag.Clinica.Email
+            </dd>
+            <dt>
+                Sitio web:
+            </dt>
+
+            <dd>
+                @ViewBag.Clinica.Sitio_web
+            </dd>
+
+        </dl>
+    </div>
+    <div>
+        <h4>Paciente</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Identificacion:
+            </dt>
+
+            <dd>
+                @ViewBag.Paciente.Identificacion
+            </dd>
+            <dt>
+                Nombre:
+            </dt>
+
+            <dd>
+                @ViewBag.Paciente.Nombre
+            </dd>
+            <dt>
+                Primer apellido:
+            </dt>
+
+            <dd>
+                @ViewBag.Paciente.Primer_apellido
+            </dd>
+            <dt>
+                Segundo apellido:
+            </dt>
+
+            <dd>
+                @ViewBag.Paciente.Segundo_apellido
+            </dd>
+            <dt>
+                Fecha de nacimiento:
+            </dt>
+            <dd>
+                @ViewBag.Paciente.Fecha_nacimiento
+            </dd>
+            <dt>
+                Sexo natural:
+            </dt>
+
+            <dd>
+                @ViewBag.Paciente.Sexo_natural
+            </dd>
+            <dt>
+                Telefono de contacto:
+            </dt>
+
+            <dd>
+                @ViewBag.Paciente.Telefono_contacto
+            </dd>
+
+            <dt>
+                Pais:
+            </dt>
+
+            <dd>
+                @ViewBag.Paciente.Pais
+            </dd>
+            <dt>
+                Estado/Provincia:
+            </dt>
+
+            <dd>
+                @ViewBag.Paciente.Estado_provincia
+            </dd>
+            <dt>
+                Distrito:
+            </dt>
+
+            <dd>
+                @ViewBag.Paciente.Distrito
+            </dd>
+            <dt>
+                Email:
+            </dt>
+
+            <dd>
+                @ViewBag.Paciente.Email
+            </dd>
+            <dt>
+                Fecha de registro:
+            </dt>
+
+            <dd>
+                @ViewBag.Paciente.Fecha_registro
+            </dd>
+            <dt>
+                Ocupacion:
+            </dt>
+
+            <dd>
+                @ViewBag.Paciente.Ocupacion
+            </dd>
+
+        </dl>
+    </div>
+    <div>
+        <h4>Inyeccion experimental</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Nombre completo:
+            </dt>
+
+            <dd>
+                @ViewBag.Inyeccion.Nombre
+            </dd>
+
+            <dt>
+                Marca:
+            </dt>
+
+            <dd>
+                @ViewBag.Inyeccion.Marca
+            </dd>
+            <dt>
+                Fecha de aplicacion:
+            </dt>
+
+            <dd>
+                @ViewBag.Inyeccion.Fecha_aplicacion
+            </dd>
+            <dt>
+                Numero de lote:
+            </dt>
+
+            <dd>
+                @ViewBag.Inyeccion.Numero_lote
+            <dt>
+                Fecha de vencimiento:
+            </dt>
+
+            <dd>
+                @ViewBag.Inyeccion.Fecha_vencimiento
+            </dd>
+            <dt>
+                Lugar de aplicacion:
+            </dt>
+
+            <dd>
+                @ViewBag.Inyeccion.Lugar_aplicacion
+            </dd>
+            <dt>
+                Observaciones:
+            </dt>
+
+            <dd>
+                @ViewBag.Inyeccion.Observaciones
+            </dd>
+            @foreach (var c in ViewBag.Cuestionario_inyec_dict)
+            {
+
+                <dt>
+                    @c.Key
+                </dt>
+
+                <dd>
+                    @c.Value
+                </dd>
+
+            }
+
+        </dl>
+    </div>
+    <div>
+        <h4>Efectos Adversos</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            @foreach (var c in ViewBag.Cuestionario_reporte_dict)
+            {
+
+                <dt>
+                    @c.Key
+                </dt>
+
+                <dd>
+                    @c.Value
+                </dd>
+
+            }
 
 
 
-    </dl>
-</div>
+        </dl>
+    </div>
 </div>
 <p>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="button" value="Finalizar" class="btn btn-info" onclick="Saltar_clinica(); return false;" />
+            <input type="button" value="Finalizar" class="btn btn-info" onclick="Enviar_Email(); return false;" />
 
         </div>
     </div>
@@ -331,7 +331,7 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
     <script type="text/javascript">
-        function Saltar_clinica() {
+        function Enviar_Email() {
             var htmlString = document.getElementById("comprobante").innerHTML;
             $(function () {
                 $.post('/App/Email',
@@ -341,6 +341,7 @@
                 $.post('/App/Email',
                     { recipient: '@ViewBag.Medico.Email', subject: "Comprobante reporte efectos adversos inyecciones experimentales", body: htmlString });
             });
+            alert("Reporte realizado ! Comprobantes enviados a sus respectivos direcciones de correo electrónico")
             window.location = "/Home/Index";
         }
     </script>
